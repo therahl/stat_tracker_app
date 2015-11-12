@@ -35,6 +35,9 @@ gem 'paperclip'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'react-rails', '~> 1.0.0'
+gem 'font-awesome-sass', '~> 4.4.0'
+gem 'react-router-rails', '~>0.13.3.1'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-alt'
 end
