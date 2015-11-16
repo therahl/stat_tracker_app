@@ -5,5 +5,9 @@ class CreateUser < ActiveRecord::Migration
       t.string :family_name
       t.attachment :avatar
     end
+    create_table :settings do |t|
+      t.string :metric, default: true
+      t.references :user
+    end
   end
 end

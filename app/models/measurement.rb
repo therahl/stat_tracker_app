@@ -1,3 +1,3 @@
-class User < ActiveRecord::Base
-  belongs_to :users
+class Measurement < ActiveRecord::Base
+  belongs_to :user
 end

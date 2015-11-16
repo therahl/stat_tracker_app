@@ -1,0 +1,16 @@
+<div class="col-xs-12 col-md-6">
+  <h1>Photos</h1>
+  <p>Upload new photos.  The app will use you first photo and most recent photo in the box for a side by side comparison.</p>
+  <%= react_component('PhotoUpload', {}, { prerender: true }) %>
+</div>
+
+<div class="col-xs-12 col-md-6">
+  <%= react_component('PhotoBox', {first: current_user.photos.first, current: current_user.photos.last}, { prerender: true }) %>
+</div>
+
+<div class="col-xs-12">
+  Front
+  Back
+  Side
+  Other
+</div>

@@ -11,21 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112042259) do
+ActiveRecord::Schema.define(version: 20151116012838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "measurements", force: :cascade do |t|
     t.float   "weight"
+    t.float   "date"
     t.float   "neck"
+    t.float   "bicep"
     t.float   "chest"
     t.float   "shoulders"
     t.float   "waist"
     t.float   "hips"
     t.float   "thigh"
     t.float   "calf"
-    t.integer "users_id"
+    t.integer "user_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.date     "date"
+    t.string   "angle"
+    t.integer  "user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string  "metric",  default: "t"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

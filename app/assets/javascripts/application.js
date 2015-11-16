@@ -13,8 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
-//= require react_router
+//= require react
+//= require react_ujs
+//= require alt
+//= require components
 //= require_tree .
 
 var alt = new Alt();
