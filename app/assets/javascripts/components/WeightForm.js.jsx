@@ -17,17 +17,8 @@ class WeightForm extends React.Component{
       thigh: React.findDOMNode(this.refs.thigh).value,
       calf: React.findDOMNode(this.refs.calf).value
     }
-    console.log('submitted');
-    console.log(data);
-    $.ajax({
-      url: `/measurements`,
-      method: 'POST',
-      dataType: 'JSON',
-      data: { id: this.props.id, measurements: data }
-    }).success(result => {
+    MeasurementActions.addMeasurements(this.props.id, data, () => {
       $(React.findDOMNode(this)).find('form')[0].reset();
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
     });
   }
   render(){

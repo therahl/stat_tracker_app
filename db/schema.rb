@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116012838) do
+ActiveRecord::Schema.define(version: 20151128060234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "measurements", force: :cascade do |t|
     t.float   "weight"
-    t.float   "date"
+    t.date    "date"
     t.float   "neck"
     t.float   "bicep"
     t.float   "chest"

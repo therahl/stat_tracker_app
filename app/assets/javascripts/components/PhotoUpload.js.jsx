@@ -2,30 +2,71 @@ class PhotoUpload extends React.Component{
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.expandForm = this.expandForm.bind(this);
+    this.state = { expanded: false };
   }
-  handleSubmit(){
+  handleSubmit(e){
+    e.preventDefault();
     console.log('handleSubmit');
     let data = {
       angle: this.refs.angle
-    }
+    };
     $.ajax({
       url: '/photos',
-      method: 'POST',
+      method: 'PUT',
       data: { photos: data }
     }).success(result => {
       console.log('success');
 
-    }).fail(error => {
-      console.log(error);
+    }).fail(err => {
+      console.log(err);
     })
   }
-
+  expandForm(){
+    this.setState({expanded: !this.state.expanded})
+  }
   render(){
+    if(!this.state.expanded){
+      return(
+        <div className="well">
+          <legend>
+            <span onClick={this.expandForm} className="fa-stack fa-lg" style={{fontSize: 'initial'}}>
+              <i className="fa fa-stack-2x fa-circle" style={{color: '#333333'}}></i>
+              <i className="fa fa-stack-1x fa-plus fa-inverse"></i>
+            </span>
+             Add New Photoset
+          </legend>
+        </div>
+      );
+    }
     return(
       <div className="well">
-        <form onSubmit={this.handleSubmit} className="form-horizontal">
+        <form onSubmit={this.handleSubmit} className="form-inline">
           <fieldset>
-            <legend>Add New Photo</legend>
+            <legend>
+              <span onClick={this.expandForm} className="fa-stack fa-lg" style={{fontSize: 'initial'}}>
+                <i className="fa fa-stack-2x fa-circle" style={{color: '#333333'}}></i>
+                <i className="fa fa-stack-1x fa-minus fa-inverse"></i>
+              </span>
+               Add New Photoset
+            </legend>
+            <div className="col-xs-12 col-md-3 add-photo text-center">
+              Front<br />
+              <i className="fa fa-plus"></i>
+              <input type="file" className="form-control" required="required" />
+            </div>
+            <div className="col-xs-12 col-md-3 add-photo text-center">
+              Side<br />
+              <i className="fa fa-plus"></i>
+            </div>
+            <div className="col-xs-12 col-md-3 add-photo text-center">
+              Back<br />
+              <i className="fa fa-plus"></i>
+            </div>
+            <div className="col-xs-12 col-md-3 add-photo text-center">
+              Other<br />
+              <i className="fa fa-plus"></i>
+            </div>
             <div className="form-group">
               <label className="col-xs-2 control-label">Date</label>
               <div className="col-xs-10">
@@ -33,30 +74,14 @@ class PhotoUpload extends React.Component{
               </div>
             </div>
             <div className="form-group">
-              <label className="col-xs-2 control-label">Angle</label>
-              <div className="col-xs-10">
-                <select ref="angle" className="form-control">
-                  <option>Front</option>
-                  <option>Side</option>
-                  <option>Back</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="col-xs-2 control-label">Photo</label>
-              <div className="col-xs-10">
-                <input type="file" className="form-control" required="required" />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="col-xs-10 col-xs-offset-2">
+              <div>
                 <button type="reset" className="btn btn-default">Cancel</button>
                 <button type="submit" className="btn btn-primary">Submit</button>
               </div>
             </div>
           </fieldset>
         </form>
-      </div>    );
+      </div>
+    );
   }
 }

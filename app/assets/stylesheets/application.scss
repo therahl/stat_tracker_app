@@ -38,3 +38,17 @@
 .photo-wrapper {
   position: relative;
 }
+
+.add-photo {
+  height: 300px;
+  border: 3px dashed $gray-dark;
+  font-size: 3em;
+  opacity: 0.25;
+  padding-top: 20px;
+  color: $gray-lighter;
+  margin: 5px;
+  width: 24%;
+  i {
+    font-size: 3em;
+  }
+}

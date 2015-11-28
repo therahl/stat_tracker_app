@@ -2,6 +2,11 @@ class PhotosController < ApplicationController
   def index
   end
 
+  def create
+    current_user.photos.create(photo_params)
+    render json: 'Success!!!! Created!!'
+  end
+
   def update
     current_user.photos.create(photo_params)
     render json: 'Success!'

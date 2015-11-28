@@ -19,9 +19,6 @@
 //= require components
 //= require_tree .
 
-var alt = new Alt();
-
-
 
 // If you want to avoid adding a module system, you'll need to wrap Alt examples in an IIFE. If the Alt docs read something like this:
 

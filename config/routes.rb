@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   root 'dashboard#index'
+
+  devise_for :users
 
   resources :measurements
   resources :settings
+  resources :photos
 
-  get 'photos' => 'photos#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

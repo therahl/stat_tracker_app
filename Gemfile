@@ -34,7 +34,6 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'react-rails', '~> 1.1.0'
 gem 'font-awesome-sass', '~> 4.4.0'
-gem 'react-router-rails', '~>0.13.3.1'
 gem 'ruby-units'
 
 source 'https://rails-assets.org' do
@@ -49,12 +48,14 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop'
   gem 'faker'
-end
-
-group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+group :production do
+  gem 'rails_12factor', group: :production
+end
+
+ruby "2.2.0"

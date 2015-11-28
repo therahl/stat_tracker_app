@@ -1,14 +1,14 @@
 <div class="col-xs-12 col-md-6">
   <h1>Measurements</h1>
   <p>Add new measurement, view all past measurements in detail and view progress indicators, charts that show changes.</p>
-  <%= react_component('WeightForm', {id: @user_id}, { prerender: true }) %>
+  <%= react_component('WeightForm', {id: @user_id} ) %>
 </div>
 
 <div class="col-xs-12 col-md-6">
-  <%= react_component('PhotoBox', {first: @first_photo, current: @current_photo}, { prerender: true }) %>
+  <%= react_component('PhotoBox', {first: @first_photo, current: @current_photo} ) %>
   <div class="well">cool charts here </div>
 </div>
 
 <div class="col-xs-12">
-  <%= react_component('RecentMeasurements', {measurements: @measurements}, { prerender: true }) %>
+  <%= react_component('RecentMeasurements') %>
 </div>

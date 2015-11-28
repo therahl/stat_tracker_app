@@ -1,14 +1,27 @@
 class RecentMeasurements extends React.Component{
   constructor(props){
     super(props);
+    MeasurementActions.initialize();
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.state = MeasurementsStore.getState();
   }
-  handleDelete(){
-    console.log('Handle Delete');
+  componentDidMount() {
+    MeasurementsStore.listen(this.handleStateChange);
+  }
+  componentWillUnmount() {
+    MeasurementsStore.unlisten(this.handleStateChange);
+  }
+  handleStateChange(state) {
+    this.setState(state);
+  }
+  handleDelete(e){
+    let id = $(React.findDOMNode(e.target)).attr('name');
+    MeasurementActions.deleteMeasurement(id);
   }
   render(){
     let tableData = [1,2,3,4,5,6];
-    let tableRow = this.props.measurements.map(row => {
+    let tableRow = this.state.measurements.map(row => {
       let total = 0;
       Object.keys(row).forEach(key => {
         if(key !== 'weight' && key !== 'date' && key !== 'id' && key !== 'user_id'){
@@ -16,8 +29,8 @@ class RecentMeasurements extends React.Component{
         }
       });
       return(
-        <tr>
-          <td>11/11/2015</td>
+        <tr key={row.id}>
+          <td>{row.date}</td>
           <td>{row.weight}</td>
           <td>{row.neck}</td>
           <td>{row.shoulders}</td>
@@ -30,7 +43,7 @@ class RecentMeasurements extends React.Component{
           <td>{total}</td>
           <td>
             <i className="fa fa-pencil"></i>
-            <i onClick={this.handleDelete} className="fa fa-trash pull-right"></i>
+            <i name={row.id} onClick={this.handleDelete} className="fa fa-trash pull-right"></i>
           </td>
         </tr>);
     });
