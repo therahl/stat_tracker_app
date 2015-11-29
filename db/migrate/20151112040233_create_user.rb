@@ -6,7 +6,9 @@ class CreateUser < ActiveRecord::Migration
       t.attachment :avatar
     end
     create_table :settings do |t|
-      t.string :metric, default: true
+      t.string :girth_units, default: 'metric'
+      t.string :weight_units, default: 'metric'
+      t.string :height_units, default: 'metric'
       t.references :user
     end
   end

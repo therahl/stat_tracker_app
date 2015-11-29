@@ -19,14 +19,14 @@ ActiveRecord::Schema.define(version: 20151128060234) do
   create_table "measurements", force: :cascade do |t|
     t.float   "weight"
     t.date    "date"
-    t.float   "neck"
-    t.float   "bicep"
-    t.float   "chest"
-    t.float   "shoulders"
-    t.float   "waist"
-    t.float   "hips"
-    t.float   "thigh"
-    t.float   "calf"
+    t.float   "neck",      default: 0.0
+    t.float   "bicep",     default: 0.0
+    t.float   "chest",     default: 0.0
+    t.float   "shoulders", default: 0.0
+    t.float   "waist",     default: 0.0
+    t.float   "hips",      default: 0.0
+    t.float   "thigh",     default: 0.0
+    t.float   "calf",      default: 0.0
     t.integer "user_id"
   end
 
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 20151128060234) do
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string  "metric",  default: "t"
+    t.string  "girth_units",  default: "metric"
+    t.string  "weight_units", default: "metric"
+    t.string  "height_units", default: "metric"
     t.integer "user_id"
   end
 

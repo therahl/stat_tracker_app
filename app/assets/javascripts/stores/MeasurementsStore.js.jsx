@@ -11,7 +11,7 @@
       });
     }
     initialize(resp){
-      this.setState({measurements: resp.measurements, user_id: resp.user_id});
+      this.setState({...resp});
     }
     handleUpdateMeasurements(measurements) {
       this.setState({measurements});

@@ -22,12 +22,6 @@ class RecentMeasurements extends React.Component{
   render(){
     let tableData = [1,2,3,4,5,6];
     let tableRow = this.state.measurements.map(row => {
-      let total = 0;
-      Object.keys(row).forEach(key => {
-        if(key !== 'weight' && key !== 'date' && key !== 'id' && key !== 'user_id'){
-          total += row[key];
-        }
-      });
       return(
         <tr key={row.id}>
           <td>{row.date}</td>
@@ -40,7 +34,7 @@ class RecentMeasurements extends React.Component{
           <td>{row.hips}</td>
           <td>{row.thigh}</td>
           <td>{row.calf}</td>
-          <td>{total}</td>
+          <td>{row.total}</td>
           <td>
             <i className="fa fa-pencil"></i>
             <i name={row.id} onClick={this.handleDelete} className="fa fa-trash pull-right"></i>
@@ -57,16 +51,16 @@ class RecentMeasurements extends React.Component{
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Weight</th>
-                <th>Neck</th>
-                <th>Shoulders</th>
-                <th>Bicep</th>
-                <th>Chest</th>
-                <th>Waist</th>
-                <th>Hips</th>
-                <th>Thigh</th>
-                <th>Calf</th>
-                <th>Total</th>
+                <th>Weight ({this.state.weight_units})</th>
+                <th>Neck ({this.state.girth_units})</th>
+                <th>Shoulders ({this.state.girth_units})</th>
+                <th>Bicep ({this.state.girth_units})</th>
+                <th>Chest ({this.state.girth_units})</th>
+                <th>Waist ({this.state.girth_units})</th>
+                <th>Hips ({this.state.girth_units})</th>
+                <th>Thigh ({this.state.girth_units})</th>
+                <th>Calf ({this.state.girth_units})</th>
+                <th>Total ({this.state.girth_units})</th>
                 <th>Edit</th>
               </tr>
             </thead>
