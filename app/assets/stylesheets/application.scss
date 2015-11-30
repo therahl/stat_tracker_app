@@ -66,8 +66,6 @@
     display: none;
   }
 }
-.hidden-radio:checked{
-  label {
-    background-color: #DF691A;
-  }
+.active-radio {
+  background-color: #DF691A;
 }
