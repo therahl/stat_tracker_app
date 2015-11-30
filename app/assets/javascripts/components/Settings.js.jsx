@@ -6,7 +6,19 @@
 class Settings extends React.Component{
   constructor(props){
     super(props);
+    SettingsActions.initialize();
     this.radioChange = this.radioChange.bind(this);
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.state = SettingsStore.getState();
+  }
+  componentDidMount() {
+    SettingsStore.listen(this.handleStateChange);
+  }
+  componentWillUnmount() {
+    SettingsStore.unlisten(this.handleStateChange);
+  }
+  handleStateChange(state) {
+    this.setState(state);
   }
   radioChange(unitName, checked){
     let units = '';
@@ -20,24 +32,30 @@ class Settings extends React.Component{
       default:
         console.log('default hit');
     }
+    // create setting actions and store
+    SettingsActions.updateSettings(this.props.id, {[unitName]: units});
     console.log(units);
   }
   render(){
+    if(!this.state){
+      return(<div></div>);
+    }
+
     return(
       <div className="well">
         <form onSubmit={this.handeSubmit} className="form-horizontal">
           <fieldset>
             <legend>Units</legend>
-            <div className="form-group">
+            <div className="col-xs-12 form-group">
               <label className="control-label">Girth Measurements</label>
-              <div className="col-xs-12">
-                <RadioSet checked='metric' callback={this.radioChange} name='girth_units' labels={['Metric', 'US Standard']} />
+              <div className="">
+                <RadioSet checkedField={this.state.girth_units} callback={this.radioChange} name='girth_units' labels={['Metric', 'US Standard']} />
               </div>
             </div>
-            <div className="form-group">
+            <div className="col-xs-12 form-group">
               <label className="control-label">Weight</label>
-              <div className="col-xs-12">
-                <RadioSet checked='imperial' callback={this.radioChange} name='weight_units' labels={['Metric', 'US Standard']} />
+              <div className="">
+                <RadioSet checkedField={this.state.weight_units} callback={this.radioChange} name='weight_units' labels={['Metric', 'US Standard']} />
               </div>
             </div>
           </fieldset>

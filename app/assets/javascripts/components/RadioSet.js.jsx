@@ -17,15 +17,18 @@ class RadioSet extends React.Component{
     this.props.callback(this.props.name, $(React.findDOMNode(this)).find('input:checked').val());
   }
   render(){
+    let metric = this.props.checkedField === 'metric';
+    let imperial = this.props.checkedField === 'imperial';
+    console.log(`${this.props.name}`, metric);
     return(
       <div className="radio hidden-radio">
         <label>
           {this.props.labels[0]}
-          <input defaultChecked={this.props.checked == 'metric' ? true : false } type="radio" onClick={this.handleClick} name={this.props.name} value="first" />
+          <input defaultChecked={metric} type="radio" onChange={this.handleClick} name={this.props.name} value="first" />
         </label>
         <label>
           {this.props.labels[1]}
-          <input defaultChecked={this.props.checked == 'metric' ? false : true } type="radio" onClick={this.handleClick} name={this.props.name} value="second" />
+          <input defaultChecked={imperial} type="radio" onChange={this.handleClick} name={this.props.name} value="second" />
         </label>
       </div>
     );

@@ -2,14 +2,6 @@ class MeasurementsController < ApplicationController
   before_action :measurements
 
   def index
-    # @measurements = current_user.measurements.by_date
-    # json_object = []
-    # @measurements.each do |girth|
-    #   json_object.push({ id: girth['id'], date: girth['date'], weight: girth['weight'], neck: girth['neck'],
-    #     chest: girth['chest'], hips: girth['hips'], thigh: girth['thigh'], calf: girth['calf'],
-    #     bicep: girth['bicep'], shoulders: girth['shoulders'], waist: girth['waist'], total: Measurement.find(girth['id']).total_girth })
-    # end
-    # @user_id = current_user.id
     respond_to do |format|
       format.json { render json: @data }
       format.html { render :index }
