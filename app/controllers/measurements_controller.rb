@@ -3,36 +3,35 @@ class MeasurementsController < ApplicationController
 
   def index
     # @measurements = current_user.measurements.by_date
-    json_object = []
-    @measurements.each do |girth|
-      json_object.push({ id: girth['id'], date: girth['date'], weight: girth['weight'], neck: girth['neck'],
-        chest: girth['chest'], hips: girth['hips'], thigh: girth['thigh'], calf: girth['calf'],
-        bicep: girth['bicep'], shoulders: girth['shoulders'], waist: girth['waist'], total: Measurement.find(girth['id']).total_girth })
-    end
-    @user_id = current_user.id
+    # json_object = []
+    # @measurements.each do |girth|
+    #   json_object.push({ id: girth['id'], date: girth['date'], weight: girth['weight'], neck: girth['neck'],
+    #     chest: girth['chest'], hips: girth['hips'], thigh: girth['thigh'], calf: girth['calf'],
+    #     bicep: girth['bicep'], shoulders: girth['shoulders'], waist: girth['waist'], total: Measurement.find(girth['id']).total_girth })
+    # end
+    # @user_id = current_user.id
     respond_to do |format|
-      format.json { render json: { measurements: json_object, user_id: current_user.id, girth_units: current_user.setting.girth_units, height_units: current_user.setting.height_units, weight_units: current_user.setting.weight_units } }
+      format.json { render json: @data }
       format.html { render :index }
     end
   end
 
   def create
-    params.map do |k, v|
-      value ||= 0
+    params[:measurements].map do |k, v|
+      v = 0 if v.blank?
       if k == 'weight'
         params[k] = "#{v} #{@weight_units}".convert_to('kg').scalar.to_f
       else
-        binding.pry
         params[k] = "#{v} #{@girth_units}".convert_to('cm').scalar.to_f unless ['date', 'id', 'user_id'].include? k
       end
     end
     current_user.measurements.create(measurement_params)
-    render json: @measurements
+    render json: @data
   end
 
   def update
-    params.map do |k, v|
-      value ||= 0
+    params[:measurements].map do |k, v|
+      v = 0 if v.blank?
       if k == 'weight'
         params[k] = "#{v} #{@weight_units}".convert_to('kg').scalar.to_f
       else
@@ -51,8 +50,17 @@ class MeasurementsController < ApplicationController
   private
 
   def measurements
-    @measurements = current_user.measurements.by_date.to_a.map(&:serializable_hash)
+    paginated = current_user.measurements.by_date.paginate(page: params[:page])
+    @measurements = paginated.to_a.map(&:serializable_hash)
     convert_units
+    json_object = []
+    @measurements.each do |girth|
+      json_object.push({ id: girth['id'], date: girth['date'], weight: girth['weight'], neck: girth['neck'],
+        chest: girth['chest'], hips: girth['hips'], thigh: girth['thigh'], calf: girth['calf'],
+        bicep: girth['bicep'], shoulders: girth['shoulders'], waist: girth['waist'], total: Measurement.find(girth['id']).total_girth })
+    end
+    @data = { current_page: paginated.current_page, total_pages: paginated.total_pages, measurements: json_object, user_id: current_user.id, girth_units: current_user.setting.girth_units, height_units: current_user.setting.height_units, weight_units: current_user.setting.weight_units }
+
   end
 
   def convert_units

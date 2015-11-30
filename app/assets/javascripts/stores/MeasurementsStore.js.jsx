@@ -7,20 +7,24 @@
         handleUpdateMeasurements: MeasurementActions.updateMeasurements,
         addMeasurements: MeasurementActions.addMeasurements,
         deleteMeasurement: MeasurementActions.deleteMeasurement,
+        updatePage: MeasurementActions.updatePage,
         initialize: MeasurementActions.initialize,
       });
     }
     initialize(resp){
       this.setState({...resp});
     }
-    handleUpdateMeasurements(measurements) {
-      this.setState({measurements});
+    handleUpdateMeasurements(resp) {
+      this.setState({...resp});
     }
-    addMeasurements(measurements) {
-      this.setState({measurements});
+    updatePage(resp){
+      this.setState({...resp});
     }
-    deleteMeasurement(measurements) {
-      this.setState({measurements});
+    addMeasurements(resp) {
+      this.setState({...resp});
+    }
+    deleteMeasurement(resp) {
+      this.setState({...resp});
     }
   }
 

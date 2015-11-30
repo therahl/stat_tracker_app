@@ -15,7 +15,7 @@ class Measurement < ActiveRecord::Base
   #   value = value.convert_to(units)
   #   value.scalar.to_f
   # end
-
+  self.per_page = 15
   def total_girth
     values = self.attributes.reject{ |k, v| ['date', 'weight', 'id', 'user_id'].include? k }
     total = 0

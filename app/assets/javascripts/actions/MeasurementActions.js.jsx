@@ -14,6 +14,18 @@
     updateMeasurements(measurements) {
       this.dispatch(measurements);
     }
+    updatePage(page) {
+      $.ajax({
+        url: `/measurements`,
+        method: 'GET',
+        dataType: 'JSON',
+        data: { page }
+      }).success(result => {
+        this.dispatch(result);
+      }).fail(error => {
+        console.log('AJAX FAIL', error);
+      });
+    }
     addMeasurements(id, measurements, callback){
       $.ajax({
         url: `/measurements`,

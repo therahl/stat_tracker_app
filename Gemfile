@@ -35,6 +35,7 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'react-rails', '~> 1.1.0'
 gem 'font-awesome-sass', '~> 4.4.0'
 gem 'ruby-units'
+gem 'will_paginate', '~> 3.0.6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-alt'

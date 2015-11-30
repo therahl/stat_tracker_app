@@ -52,3 +52,22 @@
     font-size: 3em;
   }
 }
+.hidden-radio {
+  label {
+    color: white !important;
+    height: 30px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 5px !important;
+    margin-top: 10px !important;
+  }
+
+  input {
+    display: none;
+  }
+}
+.hidden-radio:checked{
+  label {
+    background-color: #DF691A;
+  }
+}

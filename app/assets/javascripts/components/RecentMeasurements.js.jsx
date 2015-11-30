@@ -3,6 +3,7 @@ class RecentMeasurements extends React.Component{
     super(props);
     MeasurementActions.initialize();
     this.handleDelete = this.handleDelete.bind(this);
+    this.changePage = this.changePage.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
     this.state = MeasurementsStore.getState();
   }
@@ -19,8 +20,11 @@ class RecentMeasurements extends React.Component{
     let id = $(React.findDOMNode(e.target)).attr('name');
     MeasurementActions.deleteMeasurement(id);
   }
+  changePage(page){
+    MeasurementActions.updatePage(page);
+  }
   render(){
-    let tableData = [1,2,3,4,5,6];
+    let pagination = this.state.total_pages > 1 ? (<Paginator max={this.state.total_pages} current={this.state.current_page} handleChange={this.changePage} />) : '';
     let tableRow = this.state.measurements.map(row => {
       return(
         <tr key={row.id}>
@@ -44,7 +48,7 @@ class RecentMeasurements extends React.Component{
     return(
       <div>
         <div className="page-header">
-          <h1 id="tables">Recent Measurements</h1>
+          <h1>Recent Measurements</h1>
         </div>
         <div className="bs-component">
           <table className="table table-responsive table-striped table-hover ">
@@ -68,6 +72,7 @@ class RecentMeasurements extends React.Component{
               {tableRow}
             </tbody>
           </table>
+          {pagination}
         </div>
       </div>
     );
