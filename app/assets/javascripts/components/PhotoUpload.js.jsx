@@ -3,6 +3,7 @@ class PhotoUpload extends React.Component{
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.expandForm = this.expandForm.bind(this);
+    this.photoClick = this.photoClick.bind(this);
     this.state = { expanded: false };
   }
   handleSubmit(e){
@@ -24,6 +25,10 @@ class PhotoUpload extends React.Component{
   }
   expandForm(){
     this.setState({expanded: !this.state.expanded})
+  }
+  photoClick(e){
+    console.log(e.target);
+    $(React.findDOMNode(this.refs.front)).click();
   }
   render(){
     if(!this.state.expanded){
@@ -50,10 +55,10 @@ class PhotoUpload extends React.Component{
               </span>
                Add New Photoset
             </legend>
-            <div className="col-xs-12 col-md-3 add-photo text-center">
+            <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
               Front<br />
               <i className="fa fa-plus"></i>
-              <input type="file" className="form-control" required="required" />
+              <input type="file" ref="front" className="form-control" name="front" />
             </div>
             <div className="col-xs-12 col-md-3 add-photo text-center">
               Side<br />
