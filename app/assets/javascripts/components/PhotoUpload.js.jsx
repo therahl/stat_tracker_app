@@ -4,9 +4,10 @@ class PhotoUpload extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.expandForm = this.expandForm.bind(this);
     this.photoClick = this.photoClick.bind(this);
-    this.fileSelect = this.fileSelect.bind(this);
+    this.submitPhotos = this.submitPhotos.bind(this);
+    this.addPhoto = this.addPhoto.bind(this);
     this.progressHandlingFunction = this.progressHandlingFunction.bind(this);
-
+    this.photos = [];
     this.state = { expanded: false };
   }
   handleSubmit(e){
@@ -32,9 +33,25 @@ class PhotoUpload extends React.Component{
   photoClick(e){
     $(React.findDOMNode(e.currentTarget)).find('input').click();
   }
-  fileSelect(e){
+  addPhoto(e){
+    let file = React.findDOMNode(e.target).files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      var element = e.target
+      reader.onload = function (e) {
+        debugger;
+        $(React.findDOMNode(element)).first().siblings('.photo-upload-placeholder').hide();
+        $(React.findDOMNode(element)).first().siblings('img').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    this.photos.push({angle: e.target.name, photo: formData});
+    console.log(this.photos);
+  }
+  submitPhotos(e){
     // $(React.findDOMNode(this.refs.fileName)).val(e.target.files[0].name);
-    debugger;
     let file = React.findDOMNode(e.target).files[0];
     let formData = new FormData();
     formData.append("file", file);
@@ -93,21 +110,36 @@ class PhotoUpload extends React.Component{
                Add New Photoset
             </legend>
             <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
-              Front<br />
-              <i className="fa fa-plus"></i>
-              <input onChange={this.fileSelect} type="file" style={{visibility: 'hidden'}} className="form-control" name="front" accept='image/*' />
+              <img src="" className="photo-preview"></img>
+              <span className="photo-upload-placeholder">
+                Front<br />
+                <i className="fa fa-plus"></i>
+              </span>
+              <input onChange={this.addPhoto} type="file" style={{visibility: 'hidden'}} className="form-control" name="front" accept='image/*' />
             </div>
-            <div className="col-xs-12 col-md-3 add-photo text-center">
-              Side<br />
-              <i className="fa fa-plus"></i>
+            <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
+              <img src="" className="photo-preview"></img>
+              <span className="photo-upload-placeholder">
+                Side<br />
+                <i className="fa fa-plus"></i>
+              </span>
+              <input onChange={this.addPhoto} type="file" style={{visibility: 'hidden'}} className="form-control" name="side" accept='image/*' />
             </div>
-            <div className="col-xs-12 col-md-3 add-photo text-center">
-              Back<br />
-              <i className="fa fa-plus"></i>
+            <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
+              <img src="" className="photo-preview"></img>
+              <span className="photo-upload-placeholder">
+                Back<br />
+                <i className="fa fa-plus"></i>
+              </span>
+              <input onChange={this.addPhoto} type="file" style={{visibility: 'hidden'}} className="form-control" name="back" accept='image/*' />
             </div>
-            <div className="col-xs-12 col-md-3 add-photo text-center">
-              Other<br />
-              <i className="fa fa-plus"></i>
+            <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
+              <img src="" className="photo-preview"></img>
+              <span className="photo-upload-placeholder">
+                Other<br />
+                <i className="fa fa-plus"></i>
+              </span>
+              <input onChange={this.addPhoto} type="file" style={{visibility: 'hidden'}} className="form-control" name="other" accept='image/*' />
             </div>
             <div className="form-group">
               <label className="col-xs-2 control-label">Date</label>
