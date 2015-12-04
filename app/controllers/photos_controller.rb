@@ -3,8 +3,10 @@ class PhotosController < ApplicationController
   end
 
   def create
+    params[:photo] = {}
+    params[:photo][:photo] = params[:file].tempfile
     current_user.photos.create(photo_params)
-    render json: 'Success!!!! Created!!'
+    render json: 'Success!!!! Created!!', status: 204
   end
 
   def update

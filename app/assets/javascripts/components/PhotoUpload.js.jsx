@@ -4,6 +4,9 @@ class PhotoUpload extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.expandForm = this.expandForm.bind(this);
     this.photoClick = this.photoClick.bind(this);
+    this.fileSelect = this.fileSelect.bind(this);
+    this.progressHandlingFunction = this.progressHandlingFunction.bind(this);
+
     this.state = { expanded: false };
   }
   handleSubmit(e){
@@ -27,8 +30,42 @@ class PhotoUpload extends React.Component{
     this.setState({expanded: !this.state.expanded})
   }
   photoClick(e){
-    console.log(e.target);
-    $(React.findDOMNode(this.refs.front)).click();
+    $(React.findDOMNode(e.currentTarget)).find('input').click();
+  }
+  fileSelect(e){
+    // $(React.findDOMNode(this.refs.fileName)).val(e.target.files[0].name);
+    debugger;
+    let file = React.findDOMNode(e.target).files[0];
+    let formData = new FormData();
+    formData.append("file", file);
+    $.ajax({
+      url: `/photos`,
+      method: 'POST',
+      dataType: 'JSON',
+      processData: false,
+      contentType: false,
+      xhr: () => {  // Custom XMLHttpRequest
+            var myXhr = $.ajaxSettings.xhr();
+            if(myXhr.upload){ // Check if upload property exists
+                myXhr.upload.addEventListener('progress', this.progressHandlingFunction, false); // For handling the progress of the upload
+            }
+            return myXhr;
+        },
+      data: formData
+    }).done(result => {
+      // $(React.findDOMNode(this)).find('progress').hide();
+      // $(React.findDOMNode(this.refs.fileName)).val('');
+      // this.setState({agency_information: result.agency_information, address: result.address, edit: false});
+      console.log('success!!');
+    }).fail(err => {
+      console.log(err);
+    });
+  }
+  progressHandlingFunction(e){
+    $(React.findDOMNode(this)).find('progress').show();
+    if(e.lengthComputable){
+      $('progress').attr({value:e.loaded, max:e.total});
+    }
   }
   render(){
     if(!this.state.expanded){
@@ -58,7 +95,7 @@ class PhotoUpload extends React.Component{
             <div className="col-xs-12 col-md-3 add-photo text-center" onClick={this.photoClick}>
               Front<br />
               <i className="fa fa-plus"></i>
-              <input type="file" ref="front" className="form-control" name="front" />
+              <input onChange={this.fileSelect} type="file" style={{visibility: 'hidden'}} className="form-control" name="front" accept='image/*' />
             </div>
             <div className="col-xs-12 col-md-3 add-photo text-center">
               Side<br />

@@ -25,12 +25,14 @@ class Goals extends React.Component{
           </h3>
         </div>
         <div className="panel-body">
-          <h5>
-            Current Weight: <span className="pull-right">174 lbs</span>
-          </h5>
-          <h5>
-            Target Weight: <span className="pull-right">194 lbs</span>
-          </h5>
+          <p className="pull-right">Current / Target</p>
+          <div className="clearfix"></div>
+          <p>
+            Weight: <span className="pull-right">174/190 lbs</span>
+          </p>
+          <p>
+            Girth: <span className="pull-right">205/194 cm</span>
+          </p>
         </div>
       </div>
     );
