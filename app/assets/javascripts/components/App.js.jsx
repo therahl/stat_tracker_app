@@ -32,7 +32,7 @@ class App extends React.Component{
                 <li className="dropdown">
                   <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">Kyle Hennessy<span className="caret"></span></a>
                   <ul className="dropdown-menu" aria-labelledby="download">
-                    <li><a href="/">Settings</a></li>
+                    <li><Link to="/settings">Settings</Link></li>
                     <li className="divider"></li>
                     <li>
                       <Link to="/">Sign Out</Link>
