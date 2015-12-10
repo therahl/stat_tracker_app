@@ -1,4 +1,4 @@
-class DashboardContainer extends React.Component {
+class PhotoContainer extends React.Component {
   constructor(props){
     super(props);
   }
@@ -17,7 +17,7 @@ class DashboardContainer extends React.Component {
           <StatsPanel />
         </div>
         <div className="col-xs-12">
-          <RecentMeasurements />
+          <PhotoUpload />
         </div>
 
       </div>

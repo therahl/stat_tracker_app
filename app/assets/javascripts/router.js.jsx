@@ -20,7 +20,7 @@ this.MyRoutes = (
   <Route handler={App}>
     <DefaultRoute handler={DashboardContainer} />
     <Route handler={PhotoContainer} path='/photos'/>
-    <Route handler={RecentMeasurements} path='/measurements'/>
-    <Route handler={Goals} path='/goals'/>
+    <Route handler={MeasurementsContainer} path='/measurements'/>
+    <Route handler={Settings} path='/settings'/>
   </Route>
 );

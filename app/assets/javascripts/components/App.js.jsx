@@ -8,7 +8,7 @@ class App extends React.Component{
         <div className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
-              <Link to="/">Stat Tracker</Link>
+              <Link to="/" className="navbar-brand">Stat Tracker</Link>
               <button className="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>

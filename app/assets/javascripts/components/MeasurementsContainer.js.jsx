@@ -1,4 +1,4 @@
-class DashboardContainer extends React.Component {
+class MeasurementsContainer extends React.Component {
   constructor(props){
     super(props);
   }
