@@ -32,10 +32,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'paperclip'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
-gem 'react-rails', '~> 1.1.0'
+gem 'react-rails', '~> 1.4.0'
 gem 'font-awesome-sass', '~> 4.4.0'
 gem 'ruby-units'
 gem 'will_paginate', '~> 3.0.6'
+gem 'react-router-rails', '~>0.13.3.2'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-alt'
