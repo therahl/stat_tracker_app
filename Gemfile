@@ -39,7 +39,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'react-router-rails', '~>0.13.3.2'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-alt'
+  gem 'rails-assets-alt', '~> 0.17.8'
 end
 
 group :development, :test do

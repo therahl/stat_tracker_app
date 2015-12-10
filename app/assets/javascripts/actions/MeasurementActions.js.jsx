@@ -6,7 +6,6 @@
         method: 'GET',
         dataType: 'JSON',
       }).success(result => {
-        debugger;
         this.dispatch(result);
       }).fail(error => {
         console.log('AJAX FAIL', error);

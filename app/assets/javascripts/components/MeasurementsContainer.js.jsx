@@ -5,21 +5,20 @@ class MeasurementsContainer extends React.Component {
   render(){
     return(
       <div>
-        <div className="col-xs-8">
-          <h1>Stat Tracker</h1>
-          <p>Record weekly measurements and track wieght change over time with our tools. Set weight goals to track your progress.</p>
-          <Link to="/measurements" className="btn btn-success">New Measurement</Link>
-          <a href="#" className="btn btn-primary">Update Photos</a>
-          <a href="#" className="btn btn-primary">Record Strength</a>
+        <div className="col-xs-12 col-md-6">
+          <h1>Measurements</h1>
+          <p>Add new measurement, view all past measurements in detail and view progress indicators, charts that show changes.</p>
+          <WeightForm />
         </div>
-        <div className="col-xs-4">
-          <Goals />
-          <StatsPanel />
+
+        <div className="col-xs-12 col-md-6">
+          <PhotoBox />
+          <div className="well">cool charts here </div>
         </div>
+
         <div className="col-xs-12">
           <RecentMeasurements />
         </div>
-
       </div>
     );
   }

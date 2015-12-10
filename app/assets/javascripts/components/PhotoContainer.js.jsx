@@ -5,21 +5,19 @@ class PhotoContainer extends React.Component {
   render(){
     return(
       <div>
-        <div className="col-xs-8">
-          <h1>Stat Tracker</h1>
-          <p>Record weekly measurements and track wieght change over time with our tools. Set weight goals to track your progress.</p>
-          <Link to="/measurements" className="btn btn-success">New Measurement</Link>
-          <a href="#" className="btn btn-primary">Update Photos</a>
-          <a href="#" className="btn btn-primary">Record Strength</a>
+        <div className="col-xs-12 col-md-6">
+          <h1>Photos</h1>
+          <p>Upload new photos.  The app will use you first photo and most recent photo in the box for a side by side comparison.</p>
         </div>
-        <div className="col-xs-4">
-          <Goals />
-          <StatsPanel />
+        <div className="col-xs-12 col-md-6">
+          <PhotoBox />
         </div>
         <div className="col-xs-12">
           <PhotoUpload />
         </div>
-
+        <div className="col-xs-12">
+          <PhotoTable />
+        </div>
       </div>
     );
   }
