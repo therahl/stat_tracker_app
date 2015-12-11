@@ -1,7 +1,20 @@
 class App extends React.Component{
   constructor(props){
     super(props);
+    UserActions.initialize();
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.state = UserStore.getState();
   }
+  componentDidMount() {
+    UserStore.listen(this.handleStateChange);
+  }
+  componentWillUnmount() {
+    UserStore.unlisten(this.handleStateChange);
+  }
+  handleStateChange(state) {
+    this.setState(state);
+  }
+
   render(){
     return(
       <div>
@@ -30,7 +43,7 @@ class App extends React.Component{
 
               <ul className="nav navbar-nav navbar-right">
                 <li className="dropdown">
-                  <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">Kyle Hennessy<span className="caret"></span></a>
+                  <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span></a>
                   <ul className="dropdown-menu" aria-labelledby="download">
                     <li><Link to="/settings">Settings</Link></li>
                     <li className="divider"></li>

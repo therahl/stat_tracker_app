@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   devise_for :users
-
+  get 'user' => 'users#show'
   resources :measurements
   resources :settings
   resources :photos
