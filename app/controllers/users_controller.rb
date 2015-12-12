@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: current_user
+    json_object = {given_name: current_user.given_name, family_name: current_user.family_name, photo_url: ActionController::Base.helpers.asset_url(current_user.avatar.url(:thumb))}
+    render json: json_object
   end
 
   def update

@@ -43,7 +43,9 @@ class App extends React.Component{
 
               <ul className="nav navbar-nav navbar-right">
                 <li className="dropdown">
-                  <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span></a>
+                  <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">
+                    <img src={this.state.photo_url} className="avatar-img" />{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span>
+                  </a>
                   <ul className="dropdown-menu" aria-labelledby="download">
                     <li><Link to="/settings">Settings</Link></li>
                     <li className="divider"></li>

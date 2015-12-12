@@ -5,16 +5,25 @@ class PhotosController < ApplicationController
   def create
     # this is a bad way to assign the photo angle.  TODO
     angles = ['front', 'side', 'back', 'other']
-    params[:photos].reject{ |v| v == 'undefined'}.each_with_index do |photo, i|
-      binding.pry
-      params[:photo] = {}
-      params[:photo][:date] = params[:date]
-      params[:photo][:photo] = photo.tempfile
-      params[:photo][:angle] = angles[i]
-
-      current_user.photos.create(photo_params)
+    begin
+      params[:photos].reject{ |v| v == 'undefined'}.each_with_index do |photo, i|
+        params[:file] = {}
+        params[:file][:date] = params[:date]
+        params[:file][:photo] = photo
+        params[:file][:angle] = angles[i]
+        current_user.photos.create(photo_params)
+      end
+    rescue
+      render json: "ERROR", status: 400
     end
-    render json: 'Success!!!! Created!!', status: 204
+
+    render json: current_user.photos.last, status: 200
+  end
+
+  def photoBox
+    params[:angle] = 'front' unless params[:angle].present?
+    photos = current_user.photos.where(angle: params[:angle])
+    render json: {first: photos.first.photo.url, current: photos.last.photo.url, angle: params[:angle]}
   end
 
   def update
@@ -28,6 +37,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:date, :angle, :photo)
+    params.require(:file).permit(:date, :angle, :photo)
   end
 end

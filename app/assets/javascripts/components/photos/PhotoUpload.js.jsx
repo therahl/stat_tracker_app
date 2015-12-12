@@ -4,7 +4,6 @@ class PhotoUpload extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.expandForm = this.expandForm.bind(this);
     this.photoClick = this.photoClick.bind(this);
-    // this.submitPhotos = this.submitPhotos.bind(this);
     this.addPhoto = this.addPhoto.bind(this);
     this.progressHandlingFunction = this.progressHandlingFunction.bind(this);
     this.photos = [];
@@ -12,26 +11,12 @@ class PhotoUpload extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault();
-    // console.log('handleSubmit');
-    // let photos = this.photos.map(photo => {
-    //   return {photo: photo.formData,
-    //           date: this.refs.date.value,
-    //           angle: photo.angle };
-    // });
-    // console.log(this.photos);
-    // let file = React.findDOMNode(this.refs.proPic).files[0];
-    // formData.append("file", file);
     let form = new FormData();
     form.append('photos[]', React.findDOMNode(this.refs.front).files[0]);
     form.append('photos[]', React.findDOMNode(this.refs.side).files[0]);
     form.append('photos[]', React.findDOMNode(this.refs.back).files[0]);
     form.append('photos[]', React.findDOMNode(this.refs.other).files[0]);
     form.append('date', this.refs.date.value);
-    // debugger;
-    // var xhr = new XMLHttpRequest();
-    // debugger;
-    // xhr.open('POST', '/photos', true);
-    // xhr.send(form);
 
     $.ajax({
       url: '/photos',
@@ -70,34 +55,6 @@ class PhotoUpload extends React.Component{
     this.photos.push({angle: e.target.name, photo: formData});
     console.log(this.photos);
   }
-  // submitPhotos(e){
-  //   // $(React.findDOMNode(this.refs.fileName)).val(e.target.files[0].name);
-  //   let file = React.findDOMNode(e.target).files[0];
-  //   let formData = new FormData();
-  //   formData.append("file", file);
-  //   $.ajax({
-  //     url: `/photos`,
-  //     method: 'POST',
-  //     dataType: 'JSON',
-  //     processData: false,
-  //     contentType: false,
-  //     xhr: () => {  // Custom XMLHttpRequest
-  //           var myXhr = $.ajaxSettings.xhr();
-  //           if(myXhr.upload){ // Check if upload property exists
-  //               myXhr.upload.addEventListener('progress', this.progressHandlingFunction, false); // For handling the progress of the upload
-  //           }
-  //           return myXhr;
-  //       },
-  //     data: formData
-  //   }).done(result => {
-  //     // $(React.findDOMNode(this)).find('progress').hide();
-  //     // $(React.findDOMNode(this.refs.fileName)).val('');
-  //     // this.setState({agency_information: result.agency_information, address: result.address, edit: false});
-  //     console.log('success!!');
-  //   }).fail(err => {
-  //     console.log(err);
-  //   });
-  // }
   progressHandlingFunction(e){
     $(React.findDOMNode(this)).find('progress').show();
     if(e.lengthComputable){

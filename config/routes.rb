@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'user' => 'users#show'
+  get 'photos/photo-box' => 'photos#photoBox'
   resources :measurements
   resources :settings
   resources :photos
