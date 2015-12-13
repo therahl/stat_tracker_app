@@ -5,13 +5,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    json_object = {given_name: current_user.given_name, family_name: current_user.family_name, photo_url: ActionController::Base.helpers.asset_url(current_user.avatar.url(:thumb))}
-    render json: json_object
+    json_object = {
+      given_name: current_user.given_name,
+      family_name: current_user.family_name,
+      photo_url: ActionController::Base.helpers.asset_url(current_user.avatar.url(:thumb))
+    }
+    render json: current_user
   end
 
   def update
     current_user.update(user_params)
-    render json: 'Success!'
+    render json: current_user, status: 200
   end
 
   def edit
@@ -23,6 +27,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:avatar, :given_name, :family_name)
+    params.require(:user).permit(:avatar, :given_name, :family_name, :gender, :dob)
   end
 end

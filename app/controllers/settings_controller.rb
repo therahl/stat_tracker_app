@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     respond_to do |format|
       format.json { render json: { girth_units: current_user.setting.read_attribute(:girth_units), weight_units: current_user.setting.read_attribute(:weight_units)} }

@@ -3,9 +3,13 @@
     constructor() {
       this.bindListeners({
         initialize: UserActions.initialize,
+        updateProfile: UserActions.updateProfile,
       });
     }
     initialize(resp){
+      this.setState({...resp});
+    }
+    updateProfile(resp){
       this.setState({...resp});
     }
   }
