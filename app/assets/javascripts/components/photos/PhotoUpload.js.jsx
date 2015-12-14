@@ -17,20 +17,7 @@ class PhotoUpload extends React.Component{
     form.append('photos[]', React.findDOMNode(this.refs.back).files[0]);
     form.append('photos[]', React.findDOMNode(this.refs.other).files[0]);
     form.append('date', this.refs.date.value);
-
-    $.ajax({
-      url: '/photos',
-      method: 'POST',
-      dataType: 'JSON',
-      processData: false,
-      contentType: false,
-      data: form
-    }).success(result => {
-      console.log('success');
-
-    }).fail(err => {
-      console.log(err);
-    })
+    PhotoActions.uploadPhotos(form, () => this.setState({ expanded: false }));
   }
   expandForm(){
     this.setState({expanded: !this.state.expanded})

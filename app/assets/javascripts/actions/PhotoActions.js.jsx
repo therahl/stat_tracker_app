@@ -18,7 +18,6 @@
           angle = angles[index + 1];
           break;
         default:
-          console.log('wtf how did you get here??');
       }
       $.ajax({
         url: `/photos/photo-box`,
@@ -31,17 +30,23 @@
         console.log('AJAX FAIL', error);
       });
     }
-    uploadPhotos(id, settings){
-      // $.ajax({
-      //   url: `/settings/${id}`,
-      //   method: 'PUT',
-      //   dataType: 'JSON',
-      //   data: { settings: settings }
-      // }).success(result => {
-      //   this.dispatch(result);
-      // }).fail(error => {
-      //   console.log('AJAX FAIL', error);
-      // });
+    uploadPhotos(data, callback){
+      let self = this;
+      $.ajax({
+        url: '/photos',
+        method: 'POST',
+        dataType: 'JSON',
+        processData: false,
+        contentType: false,
+        data: data
+      }).success(result => {
+        console.log('success');
+        callback();
+        debugger;
+        PhotoActions.getPhotoBox();
+      }).fail(err => {
+        console.log(err);
+      });
     }
   }
   this.PhotoActions = alt.createActions(PhotoActions);
