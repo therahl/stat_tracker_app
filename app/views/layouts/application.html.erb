@@ -10,6 +10,13 @@
   <% unless current_user %>
     <%= render 'shared/navigation' %>
   <% end %>
-  <%= yield %>
+  <% if params['controller'].include? 'users/' %>
+    <div class="container">
+      <%= yield %>
+    </div>
+  <% else %>
+    <%= yield %>
+  <% end %>
+
 </body>
 </html>
