@@ -22,5 +22,6 @@ this.MyRoutes = (
     <Route handler={PhotoContainer} path='/photos'/>
     <Route handler={MeasurementsContainer} path='/measurements'/>
     <Route handler={Settings} path='/settings'/>
+    <Route handler={Login} path='/users/sign_in'/>
   </Route>
 );

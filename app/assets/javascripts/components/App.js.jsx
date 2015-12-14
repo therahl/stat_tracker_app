@@ -14,6 +14,10 @@ class App extends React.Component{
   handleStateChange(state) {
     this.setState(state);
   }
+  handleLogout(e){
+    e.preventDefault();
+    UserActions.logout();
+  }
 
   render(){
     return(
@@ -49,8 +53,8 @@ class App extends React.Component{
                   <ul className="dropdown-menu" aria-labelledby="download">
                     <li><Link to="/settings">Settings</Link></li>
                     <li className="divider"></li>
-                    <li>
-                      <Link to="/">Sign Out</Link>
+                    <li onClick={this.handleLogout}>
+                      <a href=''>Sign Out</a>
                     </li>
                   </ul>
                 </li>

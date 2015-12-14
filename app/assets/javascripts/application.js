@@ -34,3 +34,8 @@
 //
 //   this.NameActions = alt.createActions(NameActions);
 // })();
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
