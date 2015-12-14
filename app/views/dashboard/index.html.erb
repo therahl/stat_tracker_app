@@ -1,14 +1,1 @@
-<div class="col-xs-8">
-  <h1>Stat Tracker</h1>
-  <p>Record weekly measurements and track wieght change over time with our tools. Set weight goals to track your progress.</p>
-  <%= link_to 'New Measurement', measurements_path, class: 'btn btn-success' %>
-  <a href="#" class="btn btn-primary">Update Photos</a>
-  <a href="#" class="btn btn-primary">Record Strength</a>
-</div>
-<div class="col-xs-4">
-  <%= react_component('Goals') %>
-  <%= react_component('StatsPanel') %>
-</div>
-<div class="col-xs-12">
-  <%= react_component('RecentMeasurements', { measurements: @measurements } ) %>
-</div>
+<%= react_router 'MyRoutes', 'HistoryLocation' %>

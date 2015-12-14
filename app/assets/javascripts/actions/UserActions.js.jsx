@@ -9,6 +9,7 @@
         this.dispatch(result);
       }).fail(error => {
         console.log('AJAX FAIL', error);
+        // this.dispatch(error);
       });
     }
     updateProfile(data){

@@ -7,6 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= react_router 'MyRoutes', 'HistoryLocation' %>
+  <% unless current_user %>
+    <%= render 'shared/navigation' %>
+  <% end %>
+  <%= yield %>
 </body>
 </html>

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'dashboard#index'
-
   devise_for :users, :controllers => {sessions: 'users/sessions', registrations: 'users/registrations'}
 
+  authenticated :user do
+    root 'dashboard#index', as: :authenticated_root
+  end
+
+  root "home#index"
 
   get 'user' => 'users#show'
   get 'photos/photo-box' => 'photos#photoBox'
