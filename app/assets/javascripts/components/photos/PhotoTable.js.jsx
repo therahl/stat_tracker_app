@@ -1,22 +1,35 @@
 class PhotoTable extends React.Component {
   constructor(props){
     super(props);
+    PhotoActions.photoTable();
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.state = PhotosStore.getState();
+  }
+  componentDidMount() {
+    PhotosStore.listen(this.handleStateChange);
+  }
+  componentWillUnmount() {
+    PhotosStore.unlisten(this.handleStateChange);
+  }
+  handleStateChange(state) {
+    this.setState(state);
   }
   handleDelete(){
     console.log('Handle Delete');
   }
   render(){
+    if(!this.state.photos)
+      return(<div></div>);
+    debugger;
     let tableData = [1,2,3,4,5,6];
-    let tableRow = tableData.map(row => {
+    let tableRow = this.state.photos.map(photo => {
       return(
         <tr>
-          <td>11/11/2015</td>
-          <td>front</td>
-          <td>photo data</td>
-          <td>photo data</td>
-          <td>photo data</td>
-          <td>photo data</td>
-          <td>photo data</td>
+          <td>{photo.date}</td>
+          <td><img src={photo.front.url || ''}/></td>
+          <td><img src={photo.back.url || ''}/></td>
+          <td><img src={photo.side.url || ''}/></td>
+          <td><img src={photo.other.url || ''}/></td>
           <td>
             <i className="fa fa-pencil"></i>
             <i onClick={this.handleDelete} className="fa fa-trash pull-right"></i>

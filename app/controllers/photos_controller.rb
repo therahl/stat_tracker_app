@@ -2,6 +2,7 @@ class PhotosController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    redirect_to root_path
   end
 
   def create
@@ -22,10 +23,27 @@ class PhotosController < ApplicationController
     render json: current_user.photos.last, status: 200
   end
 
-  def photoBox
+  def photo_box
     params[:angle] = 'front' unless params[:angle].present?
     photos = current_user.photos.where(angle: params[:angle])
-    render json: {first: photos.first.photo.url, current: photos.last.photo.url, angle: params[:angle]}
+    render json: { first: photos.first.photo.url, current: photos.last.photo.url, angle: params[:angle] }
+  end
+
+  def photo_table
+    obj = []
+    @photos = current_user.photos.group_by_date
+    @photos.map do |group|
+      temp = { date: group[0] }
+      group[1].map do |photo|
+        p = Photo.find(photo.id)
+        temp[p.angle] = {}
+        temp[p.angle][:url] = p.photo.url
+        temp[p.angle][:id] = p.id
+      end
+      obj << temp
+    end
+
+    render json: { photos: obj }
   end
 
   def update

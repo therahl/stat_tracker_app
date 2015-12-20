@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   get 'user' => 'users#show'
-  get 'photos/photo-box' => 'photos#photoBox'
+  get 'photos/photo-box' => 'photos#photo_box'
+  get 'photos/photo-table' => 'photos#photo_table'
 
   put 'user' => 'users#update'
 

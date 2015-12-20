@@ -37,6 +37,7 @@ gem 'font-awesome-sass', '~> 4.4.0'
 gem 'ruby-units'
 gem 'will_paginate', '~> 3.0.6'
 gem 'react-router-rails', '~>0.13.3.2'
+gem 'better_errors'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-alt', '~> 0.17.8'

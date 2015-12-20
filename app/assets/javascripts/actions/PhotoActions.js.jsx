@@ -30,6 +30,18 @@
         console.log('AJAX FAIL', error);
       });
     }
+    photoTable(page){
+      $.ajax({
+        url: `/photos/photo-table`,
+        method: 'GET',
+        dataType: 'JSON',
+        data: {page: page}
+      }).success(result => {
+        this.dispatch(result);
+      }).fail(error => {
+        console.log('AJAX FAIL', error);
+      });
+    }
     uploadPhotos(data, callback){
       let self = this;
       $.ajax({
