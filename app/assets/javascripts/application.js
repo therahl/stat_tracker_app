@@ -18,7 +18,6 @@
 //= require alt
 //= require react_router
 //= require react_router_ujs
-//= require react-rails-hot-loader
 //= require components
 //= require_tree .
 

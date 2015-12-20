@@ -20,22 +20,22 @@ class PhotoTable extends React.Component {
   render(){
     if(!this.state.photos)
       return(<div></div>);
-    debugger;
     let tableData = [1,2,3,4,5,6];
-    let tableRow = this.state.photos.map(photo => {
-      return(
-        <tr>
-          <td>{photo.date}</td>
-          <td><img src={photo.front.url || ''}/></td>
-          <td><img src={photo.back.url || ''}/></td>
-          <td><img src={photo.side.url || ''}/></td>
-          <td><img src={photo.other.url || ''}/></td>
-          <td>
-            <i className="fa fa-pencil"></i>
-            <i onClick={this.handleDelete} className="fa fa-trash pull-right"></i>
-          </td>
-        </tr>);
-    });
+    let tableRow = '';
+    // let tableRow = this.state.photos.map(photo => {
+    //   return(
+    //     <tr>
+    //       <td>{photo.date}</td>
+    //       <td><img src={photo.front.url || ''}/></td>
+    //       <td><img src={photo.back.url || ''}/></td>
+    //       <td><img src={photo.side.url || ''}/></td>
+    //       <td><img src={photo.other.url || ''}/></td>
+    //       <td>
+    //         <i className="fa fa-pencil"></i>
+    //         <i onClick={this.handleDelete} className="fa fa-trash pull-right"></i>
+    //       </td>
+    //     </tr>);
+    // });
     return(
       <div className="">
         <div className="page-header">

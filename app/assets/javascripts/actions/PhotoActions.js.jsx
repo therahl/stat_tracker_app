@@ -54,7 +54,6 @@
       }).success(result => {
         console.log('success');
         callback();
-        debugger;
         PhotoActions.getPhotoBox();
       }).fail(err => {
         console.log(err);
