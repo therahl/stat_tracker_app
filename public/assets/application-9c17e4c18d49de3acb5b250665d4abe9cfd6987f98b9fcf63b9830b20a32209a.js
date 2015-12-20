@@ -36684,6 +36684,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
+var alt = new Alt();
+//= require_tree ./actions
+//= require_tree ./stores
+//= require_tree ./components
+;
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("react"));
@@ -40143,11 +40148,6 @@ return /******/ (function(modules) { // webpackBootstrap
   }
 
 })(document, window, React, ReactDOM, ReactRouter);
-var alt = new Alt();
-//= require_tree ./actions
-//= require_tree ./stores
-//= require_tree ./components
-;
 var _this5 = this;
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
