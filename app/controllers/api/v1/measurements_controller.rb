@@ -1,12 +1,9 @@
-class MeasurementsController < ApplicationController
-  before_action :authenticate_user!
+class Api::V1::MeasurementsController < ApplicationController
+  before_action :authenticate_with_token!
   before_action :measurements
 
   def index
-    respond_to do |format|
-      format.json { render json: @data }
-      format.html { render :index }
-    end
+    render json: @data
   end
 
   def create
@@ -31,13 +28,23 @@ class MeasurementsController < ApplicationController
         params[k] = "#{v} #{@girth_units}".convert_to('cm').scalar.to_f unless ['date', 'id', 'user_id'].include? k
       end
     end
-    Measurement.find(params[:id]).update(measurement_params)
-    render json: @measurements
+
+    measure = Measurement.find(params[:id])
+
+    if measure.update(measurement_params)
+      render json: @measurements
+    else
+      render json: { errors: measure.errors }, status: 422
+    end
   end
 
   def destroy
-    Measurement.find(params[:id]).destroy
-    render json: @measurements
+    measure = Measurement.find(params[:id])
+    if measure.destroy
+      render json: @measurements
+    else
+      render json: { errors: measure.errors }, status: 422
+    end
   end
 
   private

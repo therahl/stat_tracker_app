@@ -1,9 +1,5 @@
-class PhotosController < ApplicationController
-  before_action :authenticate_user!
-
-  def index
-    redirect_to root_path
-  end
+class API::V1::PhotosController < ApplicationController
+  before_action :authenticate_with_token!
 
   def create
     # this is a bad way to assign the photo angle.  TODO

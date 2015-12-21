@@ -1,22 +1,27 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => {sessions: 'users/sessions', registrations: 'users/registrations'}
+  namespace :api, defaults: { format: :json } do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      resources :measurements
+      resources :settings
+      resources :users
+      resources :photos
+      resources :sessions, :only => [:create, :destroy]
 
-  authenticated :user do
-    root 'dashboard#index', as: :authenticated_root
+
+      get 'photos/photo-box' => 'photos#photo_box'
+      get 'photos/photo-table' => 'photos#photo_table'
+    end
   end
 
   root "home#index"
 
   get 'user' => 'users#show'
-  get 'photos/photo-box' => 'photos#photo_box'
-  get 'photos/photo-table' => 'photos#photo_table'
-
   put 'user' => 'users#update'
 
-  resources :measurements
-  resources :settings
-  resources :photos
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
