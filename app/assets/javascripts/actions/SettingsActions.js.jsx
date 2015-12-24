@@ -2,7 +2,7 @@
   class SettingsActions {
     initialize(){
       $.ajax({
-        url: `/settings`,
+        url: `api/v1/settings`,
         method: 'GET',
         dataType: 'JSON',
       }).success(result => {
@@ -13,7 +13,7 @@
     }
     updateSettings(id, settings){
       $.ajax({
-        url: `/settings/${id}`,
+        url: `api/v1/settings/${id}`,
         method: 'PUT',
         dataType: 'JSON',
         data: { settings: settings }

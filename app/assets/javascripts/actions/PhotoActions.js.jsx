@@ -20,7 +20,7 @@
         default:
       }
       $.ajax({
-        url: `/photos/photo-box`,
+        url: `api/v1/photos/photo-box`,
         method: 'GET',
         dataType: 'JSON',
         data: {angle: angle}
@@ -32,7 +32,7 @@
     }
     photoTable(page){
       $.ajax({
-        url: `/photos/photo-table`,
+        url: `api/v1/photos/photo-table`,
         method: 'GET',
         dataType: 'JSON',
         data: {page: page}
@@ -45,7 +45,7 @@
     uploadPhotos(data, callback){
       let self = this;
       $.ajax({
-        url: '/photos',
+        url: 'api/v1/photos',
         method: 'POST',
         dataType: 'JSON',
         processData: false,

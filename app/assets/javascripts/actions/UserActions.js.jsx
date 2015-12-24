@@ -2,7 +2,7 @@
   class UserActions {
     initialize(){
       $.ajax({
-        url: `/user`,
+        url: `api/v1/user`,
         method: 'GET',
         dataType: 'JSON',
       }).success(result => {
@@ -14,7 +14,7 @@
     }
     updateProfile(data){
       $.ajax({
-        url: `/user`,
+        url: `api/v1/user`,
         method: 'PUT',
         dataType: 'JSON',
         data: { user: data }
@@ -26,7 +26,7 @@
     }
     login(email, password){
       $.ajax({
-        url: `/users/sign_in`,
+        url: `api/v1/users/sign_in`,
         method: 'POST',
         dataType: 'JSON',
         data: { user: { email, password }}
@@ -39,7 +39,7 @@
     }
     logout(){
       $.ajax({
-        url: `/users/sign_out`,
+        url: `api/v1/users/sign_out`,
         method: 'DELETE',
         dataType: 'JSON',
       }).success(result => {
