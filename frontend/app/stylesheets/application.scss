@@ -1,0 +1,35 @@
+@import '../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../../bower_components/toastr/toastr.css';
+@import '../../bower_components/magnific-popup/dist/magnific-popup.css';
+
+@import 'variables';
+@import 'bootswatch';
+@import "bootstrap_override";
+@import "photos";
+@import "home";
+
+.hidden-radio {
+  label {
+    color: white !important;
+    height: 30px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 8px !important;
+    // margin-top: 10px !important;
+  }
+
+  input {
+    display: none;
+  }
+}
+.active-radio {
+  background-color: #DF691A;
+}
+.avatar-img {
+  height: 25px;
+  padding-right: 7px;
+}
+
+.italic {
+  font-style: italic;
+}
