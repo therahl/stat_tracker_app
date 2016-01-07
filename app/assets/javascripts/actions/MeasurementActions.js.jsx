@@ -2,7 +2,7 @@
   class MeasurementActions {
     initialize(){
       $.ajax({
-        url: `api/v1/measurements`,
+        url: `${BASE_URL}/api/measurements`,
         method: 'GET',
         dataType: 'JSON',
       }).success(result => {
@@ -16,7 +16,7 @@
     }
     updatePage(page) {
       $.ajax({
-        url: `api/v1/measurements`,
+        url: `${BASE_URL}/api/measurements`,
         method: 'GET',
         dataType: 'JSON',
         data: { page }
@@ -28,7 +28,7 @@
     }
     addMeasurements(id, measurements, callback){
       $.ajax({
-        url: `api/v1/measurements`,
+        url: `${BASE_URL}/api/measurements`,
         method: 'POST',
         dataType: 'JSON',
         data: { id, measurements }
@@ -41,7 +41,7 @@
     }
     deleteMeasurement(id){
       $.ajax({
-        url: `api/v1/measurements/${id}`,
+        url: `${BASE_URL}/api/measurements/${id}`,
         method: 'DELETE',
         dataType: 'JSON',
         data: { id }

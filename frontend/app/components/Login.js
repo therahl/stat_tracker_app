@@ -1,4 +1,5 @@
 import React from 'react';
+import UserActions from '../actions/UserActions';
 
 class Login extends React.Component{
   constructor(props){
@@ -12,7 +13,7 @@ class Login extends React.Component{
   render(){
     return(
       <div>
-        <form className="well form-horizontal" onSubmit={this.handleSubmit}>
+        <form className="well form-horizontal flipInX animated" onSubmit={this.handleSubmit}>
           <div className="input-group">
             <label className="control-label">Email</label>
             <input ref="email" type="email" className="form-control" />

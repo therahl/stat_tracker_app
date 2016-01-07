@@ -1,6 +1,9 @@
 import alt from '../alt';
 
+const BASE_URL = 'http://localhost:3000';
+
 class PhotoActions {
+
   getPhotoBox(current, direction){
     let angles = ['front', 'back', 'side', 'other'];
     let angle = '';
@@ -21,7 +24,7 @@ class PhotoActions {
       default:
     }
     $.ajax({
-      url: `api/v1/photos/photo-box`,
+      url: `${BASE_URL}/api/photos/photo-box`,
       method: 'GET',
       dataType: 'JSON',
       data: {angle: angle}
@@ -33,7 +36,7 @@ class PhotoActions {
   }
   photoTable(page){
     $.ajax({
-      url: `api/v1/photos/photo-table`,
+      url: `${BASE_URL}/api/photos/photo-table`,
       method: 'GET',
       dataType: 'JSON',
       data: {page: page}
@@ -46,7 +49,7 @@ class PhotoActions {
   uploadPhotos(data, callback){
     let self = this;
     $.ajax({
-      url: 'api/v1/photos',
+      url: '${BASE_URL}/api/photos',
       method: 'POST',
       dataType: 'JSON',
       processData: false,

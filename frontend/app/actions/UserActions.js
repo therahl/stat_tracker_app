@@ -1,21 +1,26 @@
 import alt from '../alt';
 
+const BASE_URL = 'http://localhost:3000';
+
 class UserActions {
+
   initialize(){
-    $.ajax({
-      url: `api/v1/user`,
-      method: 'GET',
-      dataType: 'JSON',
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-      // this.dispatch(error);
-    });
+    // $.ajax({
+    //   url: `${BASE_URL}/api/user`,
+    //   method: 'GET',
+    //   dataType: 'JSON',
+    //   data: { Authorization: 'BxbFLnqfQNLnHx5EfYe1' }
+    // }).success(result => {
+    //   this.dispatch(result);
+    // }).fail(error => {
+    //   console.log('AJAX FAIL', error);
+    //   // this.dispatch(error);
+    // });
   }
+
   updateProfile(data){
     $.ajax({
-      url: `api/v1/user`,
+      url: `${BASE_URL}/api/user`,
       method: 'PUT',
       dataType: 'JSON',
       data: { user: data }
@@ -25,26 +30,35 @@ class UserActions {
       console.log('AJAX FAIL', error);
     });
   }
+
   login(email, password){
+    if(!email || !password){
+      return toastr.error("Must include email and password");
+    }
+    
     $.ajax({
-      url: `api/v1/users/sign_in`,
+      url: `${BASE_URL}/users/sign_in`,
       method: 'POST',
       dataType: 'JSON',
       data: { user: { email, password }}
     }).success(result => {
-      window.location.pathname = '/';
+      console.log('LOGIN: ', result);
       this.dispatch(result);
     }).fail(error => {
       console.log('AJAX FAIL', error);
+      toastr.error(error);
     });
   }
+
   logout(){
     $.ajax({
-      url: `api/v1/users/sign_out`,
+      url: `${BASE_URL}/api/sessions`,
       method: 'DELETE',
       dataType: 'JSON',
     }).success(result => {
-      window.location.pathname = '/';
+      // window.location.pathname = '/';
+      // redirect to root path with react router
+      // delete token from local storage
       //EMPTY RESPONSE HERE
     }).fail(error => {
       console.log('AJAX FAIL', error);

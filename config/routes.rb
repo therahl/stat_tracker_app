@@ -3,18 +3,18 @@ require 'api_constraints'
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => {sessions: 'users/sessions', registrations: 'users/registrations'}
-  
+
   namespace :api, defaults: { format: :json } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      get 'photos/photo-box' => 'photos#photo_box'
+      get 'photos/photo-table' => 'photos#photo_table'
+
       resources :measurements
       resources :settings
       resources :users
       resources :photos
       resources :sessions, :only => [:create, :destroy]
 
-
-      get 'photos/photo-box' => 'photos#photo_box'
-      get 'photos/photo-table' => 'photos#photo_table'
     end
   end
 

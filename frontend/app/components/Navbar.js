@@ -54,6 +54,27 @@ class Navbar extends React.Component {
   }
 
   render() {
+    let status = !this.state.api_token ? (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/users/sign_in">Sign In</Link></li>
+      </ul>
+    ) : (
+      <ul className="nav navbar-nav navbar-right">
+        <li className="dropdown">
+          <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">
+            <img src={this.state.photo_url} className="avatar-img" />{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span>
+          </a>
+          <ul className="dropdown-menu" aria-labelledby="download">
+            <li><Link to="/settings">Settings</Link></li>
+            <li className="divider"></li>
+            <li onClick={this.handleLogout}>
+              <a href=''>Sign Out</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    );
+
     return (
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container">
@@ -78,20 +99,8 @@ class Navbar extends React.Component {
               </li>
             </ul>
 
-            <ul className="nav navbar-nav navbar-right">
-              <li className="dropdown">
-                <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">
-                  <img src={this.state.photo_url} className="avatar-img" />{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span>
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="download">
-                  <li><Link to="/settings">Settings</Link></li>
-                  <li className="divider"></li>
-                  <li onClick={this.handleLogout}>
-                    <a href=''>Sign Out</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            {status}
+
           </div>
         </div>
       </nav>

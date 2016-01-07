@@ -9,9 +9,9 @@ gem 'paperclip'
 gem 'devise'
 gem 'ruby-units'
 gem 'will_paginate', '~> 3.0.6'
-gem 'react-router-rails', '~>0.13.3.2'
 gem 'better_errors'
 gem 'active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development, :test do
   gem 'rspec-rails'

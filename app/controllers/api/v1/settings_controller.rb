@@ -1,4 +1,4 @@
-class API::V1::SettingsController < ApplicationController
+class Api::V1::SettingsController < ApplicationController
   before_action :authenticate_with_token!
 
   def index
