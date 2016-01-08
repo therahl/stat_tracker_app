@@ -35,12 +35,12 @@ class UserActions {
     if(!email || !password){
       return toastr.error("Must include email and password");
     }
-    
+
     $.ajax({
-      url: `${BASE_URL}/users/sign_in`,
+      url: `${BASE_URL}/api/sessions`,
       method: 'POST',
       dataType: 'JSON',
-      data: { user: { email, password }}
+      data: { session: { email, password }}
     }).success(result => {
       console.log('LOGIN: ', result);
       this.dispatch(result);

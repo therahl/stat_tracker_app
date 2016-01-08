@@ -33,8 +33,16 @@ module StatTrackerApp
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    # config.react.jsx_transform_options = {
-    #   harmony: true
-    # }
+    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+     allow do
+       origins 'http://localhost:8000'
+
+       resource '*',
+         :headers => :any,
+         :methods => [:get, :post, :delete, :put, :patch, :options, :head],
+         :max_age => 0
+      end
+    end
+
   end
 end

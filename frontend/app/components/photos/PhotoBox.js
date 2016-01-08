@@ -27,11 +27,11 @@ class PhotoBox extends React.Component{
     PhotoActions.getPhotoBox(this.state.angle, 'prev');
   }
   render(){
-    if(!this.state){
-      return(<div></div>)
-    }
+    // if(!Object.keys(this.state).length){
+    //   return(<div></div>)
+    // }
     return(
-      <div className="well">
+      <div className="well animated fadeIn">
         <div className="photo-wrapper">
           <img className="img img-responsive pull-left" src={this.state.first} height="350" width="245" style={{marginRight: 5}}/>
           <h4 className="original-photo">Original</h4>
