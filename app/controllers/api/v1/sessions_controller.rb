@@ -1,6 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
   def create
-    binding.pry
     user_password = params[:session][:password]
     user_email = params[:session][:email]
     user = user_email.present? && User.find_by(email: user_email)

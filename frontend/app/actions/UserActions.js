@@ -42,11 +42,10 @@ class UserActions {
       dataType: 'JSON',
       data: { session: { email, password }}
     }).success(result => {
-      console.log('LOGIN: ', result);
+      debugger;
       this.dispatch(result);
     }).fail(error => {
-      console.log('AJAX FAIL', error);
-      toastr.error(error);
+      toastr.error(error.statusText);
     });
   }
 
