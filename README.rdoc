@@ -3,3 +3,11 @@
 A fitness goal tracking application.  Tracks photos, weekly weight and girth measurements, and goals with related analytics and weekly email reminders.
 
 * Stack: Ruby on rails, ReactJS, AltJS, and React-Router
+
+rails s
+
+cd frontend
+
+gulp
+
+npm run watch

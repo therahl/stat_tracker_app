@@ -1,10 +1,10 @@
 {
-  "name": "newedenfaces",
-  "description": "Character voting app for EVE Online",
+  "name": "StatTrackerApp",
+  "description": "Stats and Fitness Goal Tracking",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/newedenfaces-react"
+    "url": "https://github.com/therahl/stat_tracker_app"
   },
   "main": "server.js",
   "scripts": {

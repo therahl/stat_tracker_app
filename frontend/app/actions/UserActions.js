@@ -42,7 +42,7 @@ class UserActions {
       dataType: 'JSON',
       data: { session: { email, password }}
     }).success(result => {
-      debugger;
+      LocalStorage.set('api_token', result.user.auth_token);
       this.dispatch(result);
     }).fail(error => {
       toastr.error(error.statusText);
