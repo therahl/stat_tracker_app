@@ -19,10 +19,12 @@ class UserActions {
   }
 
   updateProfile(data){
+    api_token = localStorage.api_token;
     $.ajax({
       url: `${BASE_URL}/api/user`,
       method: 'PUT',
       dataType: 'JSON',
+      headers: { Authorization: api_token },
       data: { user: data }
     }).success(result => {
       this.dispatch(result);
@@ -31,37 +33,38 @@ class UserActions {
     });
   }
 
-  login(email, password){
-    if(!email || !password){
-      return toastr.error("Must include email and password");
-    }
-
-    $.ajax({
-      url: `${BASE_URL}/api/sessions`,
-      method: 'POST',
-      dataType: 'JSON',
-      data: { session: { email, password }}
-    }).success(result => {
-      LocalStorage.set('api_token', result.user.auth_token);
-      this.dispatch(result);
-    }).fail(error => {
-      toastr.error(error.statusText);
-    });
+  login(user){
+    // if(!email || !password){
+    //   return toastr.error("Must include email and password");
+    // }
+    // if (savedJwt !== jwt) {
+    //   var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
+    //
+    //   RouterContainer.get().transitionTo(nextPath);
+    //   localStorage.setItem('jwt', jwt);
+    // }
+    location.pathname = '/'
+    localStorage.setItem('api_token', user.user.auth_token);
+    this.dispatch(user.user);
+    // $.ajax({
+    //   url: `${BASE_URL}/api/sessions`,
+    //   method: 'POST',
+    //   dataType: 'JSON',
+    //   data: { session: { email, password }}
+    // }).success(result => {
+    //   console.log('success');
+    //   localStorage.setItem('api_token', result.user.auth_token);
+    //   this.dispatch(result);
+    // }).fail(error => {
+    //   console.log(error);
+    //   toastr.error(error.statusText);
+    // });
   }
 
   logout(){
-    $.ajax({
-      url: `${BASE_URL}/api/sessions`,
-      method: 'DELETE',
-      dataType: 'JSON',
-    }).success(result => {
-      // window.location.pathname = '/';
-      // redirect to root path with react router
-      // delete token from local storage
-      //EMPTY RESPONSE HERE
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    localStorage.setItem('api_token', '');
+    window.location.pathname = '/';
+    this.dispatch();
   }
 }
 export default alt.createActions(UserActions);

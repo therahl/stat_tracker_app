@@ -1,5 +1,6 @@
 import React from 'react';
 import UserActions from '../actions/UserActions';
+import Auth from '../services/AuthService';
 
 class Login extends React.Component{
   constructor(props){
@@ -8,7 +9,7 @@ class Login extends React.Component{
   }
   handleSubmit(e){
     e.preventDefault();
-    UserActions.login(this.refs.email.value, this.refs.password.value);
+    Auth.login(this.refs.email.value, this.refs.password.value);
   }
   render(){
     return(

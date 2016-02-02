@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router';
 import NavbarStore from '../stores/NavbarStore';
+import UserStore from '../stores/UserStore';
 import NavbarActions from '../actions/NavbarActions';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = NavbarStore.getState();
+    this.state = { nav: NavbarStore.getState(), user: UserStore.getState() };
     this.onChange = this.onChange.bind(this);
   }
 
@@ -39,22 +40,8 @@ class Navbar extends React.Component {
     this.setState(state);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-
-    let searchQuery = this.state.searchQuery.trim();
-
-    if (searchQuery) {
-      NavbarActions.findCharacter({
-        searchQuery: searchQuery,
-        searchForm: this.refs.searchForm,
-        history: this.props.history
-      });
-    }
-  }
-
   render() {
-    let status = !this.state.api_token ? (
+    let status = !this.state.user.api_token ? (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/users/sign_in">Sign In</Link></li>
       </ul>

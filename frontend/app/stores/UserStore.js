@@ -7,7 +7,7 @@ class UserStore {
       initialize: UserActions.initialize,
       updateProfile: UserActions.updateProfile,
       login: UserActions.login,
-      logout: UserActoins.logout
+      logout: UserActions.logout
     });
   }
   initialize(resp){
@@ -17,11 +17,10 @@ class UserStore {
     this.setState({...resp});
   }
   login(resp){
-    debugger;
-    this.setState({...resp});
+    this.setState({...resp, isLoggedIn: true});
   }
   logout(resp){
-    this.setState({...resp});
+    this.setState({...resp, isLoggedIn: false});
   }
 }
 

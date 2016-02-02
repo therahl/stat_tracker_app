@@ -5,7 +5,6 @@ import Goals from '../Goals';
 import StatsPanel from '../StatsPanel';
 import RecentMeasurements from '../measurements/RecentMeasurements';
 
-
 class DashboardContainer extends React.Component {
   constructor(props){
     super(props);

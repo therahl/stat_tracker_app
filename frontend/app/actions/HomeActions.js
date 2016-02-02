@@ -21,7 +21,7 @@ class HomeActions {
 
   vote(winner, loser) {
     $.ajax({
-      type: 'PUT',
+      type: 'get',
       url: '/api/characters' ,
       data: { winner: winner, loser: loser }
     })

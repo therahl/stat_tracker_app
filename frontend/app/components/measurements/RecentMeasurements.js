@@ -9,7 +9,7 @@ class RecentMeasurements extends React.Component{
     this.handleDelete = this.handleDelete.bind(this);
     this.changePage = this.changePage.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
-    this.state = MeasurementsStore.getState();
+    // this.state = MeasurementsStore.getState();
   }
   componentDidMount() {
     MeasurementsStore.listen(this.handleStateChange);
@@ -28,6 +28,9 @@ class RecentMeasurements extends React.Component{
     MeasurementActions.updatePage(page);
   }
   render(){
+    if(!this.state){
+      return(<div></div>);
+    }
     let pagination = this.state.total_pages > 1 ? (<Paginator max={this.state.total_pages} current={this.state.current_page} handleChange={this.changePage} />) : '';
     let tableRow = this.state.measurements.map(row => {
       return(
