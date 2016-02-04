@@ -4,10 +4,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 
-var async = require('async');
-var request = require('request');
-var xml2js = require('xml2js');
-
 var app = express();
 // Babel ES6/JSX Compiler
 require('babel-register');
@@ -41,22 +37,22 @@ app.use(function(req, res) {
 });
 
 /**
- * Socket.io stuff.
+ * Socket.io stuff for fun and sizzle.
  */
 var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var onlineUsers = 0;
-
-io.sockets.on('connection', function(socket) {
-  onlineUsers++;
-
-  io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
-
-  socket.on('disconnect', function() {
-    onlineUsers--;
-    io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
-  });
-});
+// var io = require('socket.io')(server);
+// var onlineUsers = 0;
+//
+// io.sockets.on('connection', function(socket) {
+//   onlineUsers++;
+//
+//   io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
+//
+//   socket.on('disconnect', function() {
+//     onlineUsers--;
+//     io.sockets.emit('onlineUsers', { onlineUsers: onlineUsers });
+//   });
+// });
 
 server.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

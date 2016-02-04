@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import FooterStore from '../stores/FooterStore'
 import FooterActions from '../actions/FooterActions';
 
@@ -12,7 +12,6 @@ class Footer extends React.Component {
 
   componentDidMount() {
     FooterStore.listen(this.onChange);
-    FooterActions.getTopCharacters();
   }
 
   componentWillUnmount() {
@@ -24,16 +23,6 @@ class Footer extends React.Component {
   }
 
   render() {
-    let leaderboardCharacters = this.state.characters.map((character) => {
-      return (
-        <li key={character.characterId}>
-          <Link to={'/characters/' + character.characterId}>
-            <img className='thumb-md' src={'http://image.eveonline.com/Character/' + character.characterId + '_128.jpg'} />
-          </Link>
-        </li>
-      )
-    });
-
     return (
       <footer>
         <div className='container'>

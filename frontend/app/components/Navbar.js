@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import NavbarStore from '../stores/NavbarStore';
 import UserStore from '../stores/UserStore';
 import NavbarActions from '../actions/NavbarActions';
+import auth from '../services/AuthService';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -13,23 +14,22 @@ class Navbar extends React.Component {
 
   componentDidMount() {
     NavbarStore.listen(this.onChange);
-    NavbarActions.getCharacterCount();
 
-    let socket = io.connect();
+    // let socket = io.connect();
 
-    socket.on('onlineUsers', (data) => {
-      NavbarActions.updateOnlineUsers(data);
-    });
+    // socket.on('onlineUsers', (data) => {
+    //   NavbarActions.updateOnlineUsers(data);
+    // });
 
-    $(document).ajaxStart(() => {
-      NavbarActions.updateAjaxAnimation('fadeIn');
-    });
-
-    $(document).ajaxComplete(() => {
-      setTimeout(() => {
-        NavbarActions.updateAjaxAnimation('fadeOut');
-      }, 750);
-    });
+    // $(document).ajaxStart(() => {
+    //   NavbarActions.updateAjaxAnimation('fadeIn');
+    // });
+    //
+    // $(document).ajaxComplete(() => {
+    //   setTimeout(() => {
+    //     NavbarActions.updateAjaxAnimation('fadeOut');
+    //   }, 750);
+    // });
   }
 
   componentWillUnmount() {
@@ -41,7 +41,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    let status = !this.state.user.api_token ? (
+    let status = !auth.isLoggedIn() ? (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/users/sign_in">Sign In</Link></li>
       </ul>
@@ -85,9 +85,7 @@ class Navbar extends React.Component {
                 <Link to="/photos">Photos</Link>
               </li>
             </ul>
-
             {status}
-
           </div>
         </div>
       </nav>
