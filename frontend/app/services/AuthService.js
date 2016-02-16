@@ -5,8 +5,7 @@ import UserActions from '../actions/UserActions';
 
 class AuthService {
   login(email, password) {
-    // We call the server to log the user in.
-    Api.callApi('sessions', 'POST', { session: { email, password}}, UserActions.login);
+    Api.callApi('sessions', 'POST', { session: { email, password }}, (user) => { UserActions.login(user) });
   }
   logout(){
     Api.callApi('sessions', 'DELETE', UserActions.logout);

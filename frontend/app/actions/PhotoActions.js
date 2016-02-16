@@ -1,5 +1,5 @@
 import alt from '../alt';
-import Api from '../services/ApiService';
+import ApiService from '../services/ApiService';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -25,18 +25,18 @@ class PhotoActions {
       default:
     }
     // Api.callApi('photos/photo-box', 'm8kK-AR6aCLAKFSptMJw', 'GET', { angle: angle }, this.dispatch);
-
-    $.ajax({
-      url: `${BASE_URL}/api/photos/photo-box`,
-      method: 'GET',
-      dataType: 'JSON',
-      headers: {Authorization: 'm8kK-AR6aCLAKFSptMJw'},
-      data: {angle: angle}
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    ApiService.callApi('photos/photo-box', 'GET', { angle }, result => { return this.dispatch(result) });
+    // $.ajax({
+    //   url: `${BASE_URL}/api/photos/photo-box`,
+    //   method: 'GET',
+    //   dataType: 'JSON',
+    //   headers: {Authorization: 'm8kK-AR6aCLAKFSptMJw'},
+    //   data: {angle: angle}
+    // }).success(result => {
+    //   this.dispatch(result);
+    // }).fail(error => {
+    //   console.log('AJAX FAIL', error);
+    // });
   }
   photoTable(page){
     $.ajax({

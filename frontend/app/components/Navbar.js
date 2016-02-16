@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router';
-import NavbarStore from '../stores/NavbarStore';
 import UserStore from '../stores/UserStore';
-import NavbarActions from '../actions/NavbarActions';
+import UserActions from '../actions/UserActions';
 import auth from '../services/AuthService';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nav: NavbarStore.getState(), user: UserStore.getState() };
+    this.handleLogout = this.handleLogout.bind(this);
+    this.state = UserStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    NavbarStore.listen(this.onChange);
+    UserStore.listen(this.onChange);
 
     // let socket = io.connect();
 
@@ -33,14 +33,17 @@ class Navbar extends React.Component {
   }
 
   componentWillUnmount() {
-    NavbarStore.unlisten(this.onChange);
+    UserStore.unlisten(this.onChange);
   }
 
   onChange(state) {
     this.setState(state);
   }
-
+  handleLogout(){
+    UserActions.logout();
+  }
   render() {
+    console.log(this.state);
     let status = !auth.isLoggedIn() ? (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/users/sign_in">Sign In</Link></li>
@@ -61,7 +64,20 @@ class Navbar extends React.Component {
         </li>
       </ul>
     );
-
+    let links = auth.isLoggedIn() ?
+      (
+        <ul className="nav navbar-nav">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/measurements">Measurements</Link>
+          </li>
+          <li>
+            <Link to="/photos">Photos</Link>
+          </li>
+        </ul>
+      ) : '';
     return (
       <nav className="navbar navbar-default navbar-fixed-top">
         <div className="container">
@@ -74,17 +90,7 @@ class Navbar extends React.Component {
             </button>
           </div>
           <div className="navbar-collapse collapse" id="navbar-main">
-            <ul className="nav navbar-nav">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/measurements">Measurements</Link>
-              </li>
-              <li>
-                <Link to="/photos">Photos</Link>
-              </li>
-            </ul>
+            {links}
             {status}
           </div>
         </div>

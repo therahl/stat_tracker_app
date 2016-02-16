@@ -43,7 +43,7 @@ class UserActions {
     //   RouterContainer.get().transitionTo(nextPath);
     //   localStorage.setItem('jwt', jwt);
     // }
-    location.pathname = '/'
+    // location.pathname = '/'
     localStorage.setItem('api_token', user.user.auth_token);
     this.dispatch(user.user);
     // $.ajax({

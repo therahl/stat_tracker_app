@@ -1,4 +1,5 @@
 import alt from '../alt';
+import ApiService from '../services/ApiService';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -19,16 +20,18 @@ class MeasurementActions {
     this.dispatch(measurements);
   }
   updatePage(page) {
-    $.ajax({
-      url: `${BASE_URL}/api/measurements`,
-      method: 'GET',
-      dataType: 'JSON',
-      data: { page }
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX` FAIL', error);
-    });
+    ApiService.callApi('measurements', 'GET', { page }, function(result){return this.dispatch(result)})
+  //
+  //   $.ajax({
+  //     url: `${BASE_URL}/api/measurements`,
+  //     method: 'GET',
+  //     dataType: 'JSON',
+  //     data: { page }
+  //   }).success(result => {
+  //     this.dispatch(result);
+  //   }).fail(error => {
+  //     console.log('AJAX` FAIL', error);
+  //   });
   }
   addMeasurements(id, measurements, callback){
     $.ajax({
