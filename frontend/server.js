@@ -13,28 +13,32 @@ var React = require('react');
 var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var routes = require('./app/routes');
-
+var publicDir = process.argv[2] || __dirname + '/public'
 app.set('port', process.env.PORT || 8000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res) {
-  Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
-    if (err) {
-      res.status(500).send(err.message)
-    } else if (redirectLocation) {
-      res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
-      var page = swig.renderFile('views/index.html', { html: html });
-      res.status(200).send(page);
-    } else {
-      res.status(404).send('Page Not Found')
-    }
-  });
+app.get("*", function (req, res) {
+  res.sendFile(__dirname + "/views/index.html");
 });
+// For isomorphic react, disabled until it can handle authentication serverside
+// app.use(function(req, res) {
+  // Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
+  //   if (err) {
+  //     res.status(500).send(err.message)
+  //   } else if (redirectLocation) {
+  //     res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
+  //   } else if (renderProps) {
+  //     var html = ReactDOM.renderToString(React.createElement(Router.RoutingContext, renderProps));
+  //     var page = swig.renderFile('views/index.html', { html: html });
+  //     res.status(200).send(page);
+  //   } else {
+  //     res.status(404).send('Page Not Found')
+  //   }
+  // });
+// });
 
 /**
  * Socket.io stuff for fun and sizzle.
