@@ -44,6 +44,7 @@ class UserActions {
     //   localStorage.setItem('jwt', jwt);
     // }
     // location.pathname = '/'
+    debugger;
     localStorage.setItem('api_token', user.user.auth_token);
     this.dispatch(user.user);
     // $.ajax({

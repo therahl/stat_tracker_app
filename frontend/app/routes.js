@@ -13,6 +13,10 @@ import auth from './services/authService';
 
 const requireAuth = (nextState, replace) => {
   if (!auth.isLoggedIn()) {
+    // replace({
+    //     pathname: '/login',
+    //     state: { nextPathname: nextState.location.pathname }
+    //   })
     replace(
       { nextPathname: nextState.location.pathname },
       '/users/sign_in'

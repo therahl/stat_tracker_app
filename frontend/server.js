@@ -13,7 +13,7 @@ var React = require('react');
 var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var routes = require('./app/routes');
-var publicDir = process.argv[2] || __dirname + '/public'
+
 app.set('port', process.env.PORT || 8000);
 app.use(logger('dev'));
 app.use(bodyParser.json());

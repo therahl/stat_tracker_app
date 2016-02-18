@@ -16,7 +16,7 @@ class ApiService {
         cb(response);
       }
     }).fail( error => {
-      toastr.error(error.statusText);
+      toastr.error(error.responseJSON['errors']);
       console.log('api error', error);
     });
   }

@@ -3,13 +3,22 @@ import UserActions from '../actions/UserActions';
 import Auth from '../services/AuthService';
 
 class Login extends React.Component{
-  constructor(props){
-    super(props);
+  constructor(props, context){
+    super(props, context);
+    // context.router;
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e){
     e.preventDefault();
-    Auth.login(this.refs.email.value, this.refs.password.value);
+    const { location } = this.props
+    console.log('location: ', location);
+    Auth.login(this.refs.email.value, this.refs.password.value, () => {
+      if (location.state && location.state.nextPathname) {
+        this.props.history.replace(location.state.nextPathname)
+      } else {
+        this.props.history.replace('/')
+      }
+    });
   }
   render(){
     return(
@@ -31,4 +40,8 @@ class Login extends React.Component{
       </div>);
   }
 }
+Login.contextTypes = {
+  router: React.PropTypes.object
+}
+
 export default Login;
