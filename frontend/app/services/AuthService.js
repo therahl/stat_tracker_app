@@ -4,8 +4,8 @@ import Api from '../services/ApiService';
 import UserActions from '../actions/UserActions';
 
 class AuthService {
-  login(email, password, cb) {
-    Api.callApi('sessions', 'POST', { session: { email, password }}, (user) => { cb(); UserActions.login(user); });
+  login(email, password, redirect) {
+    Api.callApi('sessions', 'POST', { session: { email, password }}, (user) => { redirect(); UserActions.login(user); });
   }
   logout(){
     Api.callApi('sessions', 'DELETE', UserActions.logout);

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import MeasurementActions from '../../actions/MeasurementActions';
 import MeasurementsStore from '../../stores/MeasurementsStore';
 
@@ -21,7 +22,7 @@ class RecentMeasurements extends React.Component{
     this.setState(state);
   }
   handleDelete(e){
-    let id = $(React.findDOMNode(e.target)).attr('name');
+    let id = $(ReactDOM.findDOMNode(e.target)).attr('name');
     MeasurementActions.deleteMeasurement(id);
   }
   changePage(page){
@@ -32,6 +33,7 @@ class RecentMeasurements extends React.Component{
       return(<div></div>);
     }
     let pagination = this.state.total_pages > 1 ? (<Paginator max={this.state.total_pages} current={this.state.current_page} handleChange={this.changePage} />) : '';
+    console.log(this.state);
     let tableRow = this.state.measurements.map(row => {
       return(
         <tr key={row.id}>

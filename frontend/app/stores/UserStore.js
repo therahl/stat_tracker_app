@@ -11,16 +11,16 @@ class UserStore {
     });
   }
   initialize(resp){
-    this.setState({...resp});
+    this.setState({...resp.user});
   }
   updateProfile(resp){
-    this.setState({...resp});
+    this.setState({...resp.user});
   }
   login(resp){
-    this.setState({...resp, isLoggedIn: true});
+    this.setState({...resp.user, isLoggedIn: true});
   }
   logout(resp){
-    this.setState({...resp, isLoggedIn: false});
+    this.setState({...resp.user, isLoggedIn: false});
   }
 }
 

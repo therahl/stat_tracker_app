@@ -23,6 +23,7 @@ class MeasurementsStore {
     this.setState({...resp});
   }
   addMeasurements(resp) {
+    debugger;
     this.setState({...resp});
   }
   deleteMeasurement(resp) {

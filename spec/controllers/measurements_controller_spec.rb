@@ -21,6 +21,12 @@ RSpec.describe MeasurementsController, type: :controller do
       get :update
       expect(response).to have_http_status(:success)
     end
+
+    it "includes newest measurement in response" do
+      m = create(:measurement)
+      put :update, m
+      expect(response.body).to include(m)
+    end
   end
 
   describe "GET #destroy" do

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import UserStore from '../stores/UserStore';
 import UserActions from '../actions/UserActions';
@@ -8,6 +9,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
+    UserActions.initialize();
     this.state = UserStore.getState();
     this.onChange = this.onChange.bind(this);
   }
@@ -51,7 +53,7 @@ class Navbar extends React.Component {
     ) : (
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
-          <a className="dropdown-toggle" data-toggle="dropdown" href="#" id="download" aria-expanded="false">
+          <a className="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
             <img src={this.state.photo_url} className="avatar-img" />{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span>
           </a>
           <ul className="dropdown-menu" aria-labelledby="download">

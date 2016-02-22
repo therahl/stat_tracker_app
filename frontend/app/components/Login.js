@@ -14,9 +14,9 @@ class Login extends React.Component{
     console.log('location: ', location);
     Auth.login(this.refs.email.value, this.refs.password.value, () => {
       if (location.state && location.state.nextPathname) {
-        this.props.history.replace(location.state.nextPathname)
+        this.props.history.replace(location.state.nextPathname);
       } else {
-        this.props.history.replace('/')
+        this.props.history.replace('/');
       }
     });
   }

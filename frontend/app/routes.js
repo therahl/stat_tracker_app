@@ -31,5 +31,6 @@ export default (
     <Route component={MeasurementsContainer} path='/measurements' onEnter={requireAuth} />
     <Route component={Settings} path='/settings' onEnter={requireAuth} />
     <Route component={Login} path='/users/sign_in' />
+    <Route component={DashboardContainer} path='*' />
   </Route>
 );

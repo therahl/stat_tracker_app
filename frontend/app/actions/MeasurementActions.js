@@ -6,57 +6,20 @@ const BASE_URL = 'http://localhost:3000';
 class MeasurementActions {
 
   initialize(){
-    // $.ajax({
-    //   url: `${BASE_URL}/api/measurements`,
-    //   method: 'GET',
-    //   dataType: 'JSON',
-    // }).success(result => {
-    //   this.dispatch(result);
-    // }).fail(error => {
-    //   console.log('AJAX FAIL', error);
-    // });
+    ApiService.callApi('measurements', 'GET', {}, (result) => {return this.dispatch(result)});
   }
   updateMeasurements(measurements) {
     this.dispatch(measurements);
   }
   updatePage(page) {
-    ApiService.callApi('measurements', 'GET', { page }, function(result){return this.dispatch(result)})
-  //
-  //   $.ajax({
-  //     url: `${BASE_URL}/api/measurements`,
-  //     method: 'GET',
-  //     dataType: 'JSON',
-  //     data: { page }
-  //   }).success(result => {
-  //     this.dispatch(result);
-  //   }).fail(error => {
-  //     console.log('AJAX` FAIL', error);
-  //   });
+    ApiService.callApi('measurements', 'GET', { page }, (result) => {return this.dispatch(result)});
   }
   addMeasurements(id, measurements, callback){
-    $.ajax({
-      url: `${BASE_URL}/api/measurements`,
-      method: 'POST',
-      dataType: 'JSON',
-      data: { id, measurements }
-    }).success(result => {
-      callback();
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    ApiService.callApi('measurements', 'POST', { id, measurements }, (result) => { callback(); this.dispatch(result); } );
   }
   deleteMeasurement(id){
-    $.ajax({
-      url: `${BASE_URL}/api/measurements/${id}`,
-      method: 'DELETE',
-      dataType: 'JSON',
-      data: { id }
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    let url = `measurements/${id}`;
+    ApiService.callApi(url, 'DELETE', { id }, (result) => { this.dispatch(result) });
   }
 }
 export default alt.createActions(MeasurementActions);

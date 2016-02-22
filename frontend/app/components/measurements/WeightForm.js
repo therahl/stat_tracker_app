@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import MeasurementActions from '../../actions/MeasurementActions';
 
 class WeightForm extends React.Component{
@@ -9,19 +10,19 @@ class WeightForm extends React.Component{
   handleSubmit(e){
     e.preventDefault();
     let data = {
-      date: React.findDOMNode(this.refs.date).value,
-      weight: React.findDOMNode(this.refs.weight).value,
-      neck: React.findDOMNode(this.refs.neck).value,
-      shoulders: React.findDOMNode(this.refs.shoulders).value,
-      bicep: React.findDOMNode(this.refs.bicep).value,
-      chest: React.findDOMNode(this.refs.chest).value,
-      waist: React.findDOMNode(this.refs.waist).value,
-      hips: React.findDOMNode(this.refs.hips).value,
-      thigh: React.findDOMNode(this.refs.thigh).value,
-      calf: React.findDOMNode(this.refs.calf).value
+      date: ReactDOM.findDOMNode(this.refs.date).value,
+      weight: ReactDOM.findDOMNode(this.refs.weight).value,
+      neck: ReactDOM.findDOMNode(this.refs.neck).value,
+      shoulders: ReactDOM.findDOMNode(this.refs.shoulders).value,
+      bicep: ReactDOM.findDOMNode(this.refs.bicep).value,
+      chest: ReactDOM.findDOMNode(this.refs.chest).value,
+      waist: ReactDOM.findDOMNode(this.refs.waist).value,
+      hips: ReactDOM.findDOMNode(this.refs.hips).value,
+      thigh: ReactDOM.findDOMNode(this.refs.thigh).value,
+      calf: ReactDOM.findDOMNode(this.refs.calf).value
     }
     MeasurementActions.addMeasurements(this.props.id, data, () => {
-      $(React.findDOMNode(this)).find('form')[0].reset();
+      $(ReactDOM.findDOMNode(this)).find('form')[0].reset();
     });
   }
   render(){

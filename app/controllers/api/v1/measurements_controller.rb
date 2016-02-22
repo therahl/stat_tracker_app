@@ -16,6 +16,7 @@ class Api::V1::MeasurementsController < ApplicationController
       end
     end
     current_user.measurements.create(measurement_params)
+    measurements
     render json: @data
   end
 
@@ -28,20 +29,20 @@ class Api::V1::MeasurementsController < ApplicationController
         params[k] = "#{v} #{@girth_units}".convert_to('cm').scalar.to_f unless ['date', 'id', 'user_id'].include? k
       end
     end
-
-    measure = Measurement.find(params[:id])
-
+    measure = Measurement.find_by_id(params[:id])
     if measure.update(measurement_params)
-      render json: @measurements
+      measurements
+      render json: @data
     else
       render json: { errors: measure.errors }, status: 422
     end
   end
 
   def destroy
-    measure = Measurement.find(params[:id])
+    measure = Measurement.find_by_id(params[:id])
     if measure.destroy
-      render json: @measurements
+      measurements
+      render json: @data
     else
       render json: { errors: measure.errors }, status: 422
     end
@@ -76,9 +77,6 @@ class Api::V1::MeasurementsController < ApplicationController
         end
       end
     end
-  end
-
-  def to_metric
   end
 
   def measurement_params

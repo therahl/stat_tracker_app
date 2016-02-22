@@ -20,9 +20,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.get("*", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
+
+
 // For isomorphic react, disabled until it can handle authentication serverside
 // app.use(function(req, res) {
   // Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {

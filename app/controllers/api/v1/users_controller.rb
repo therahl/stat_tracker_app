@@ -3,15 +3,13 @@ class  Api::V1::UsersController < ApplicationController
 
   respond_to :json
 
-  # before_action :authenticate_user!
-
-  def show
+  def index    
     json_object = {
       given_name: current_user.given_name,
       family_name: current_user.family_name,
       photo_url: ActionController::Base.helpers.asset_url(current_user.avatar.url(:thumb))
     }
-    # render json: { user: json_object }, status 200
+    render json: { user: json_object }
   end
 
   def update

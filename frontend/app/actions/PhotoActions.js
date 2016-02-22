@@ -39,18 +39,20 @@ class PhotoActions {
     // });
   }
   photoTable(page){
-    $.ajax({
-      url: `${BASE_URL}/api/photos/photo-table`,
-      method: 'GET',
-      headers: {Authorization: 'm8kK-AR6aCLAKFSptMJw'},
-      crossDomain: true,
-      dataType: 'JSON',
-      data: {page: page}
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    ApiService.callApi('photos/photo-table', 'GET', { page }, result => { return this.dispatch(result) });
+
+    // $.ajax({
+    //   url: `${BASE_URL}/api/photos/photo-table`,
+    //   method: 'GET',
+    //   headers: {Authorization: 'm8kK-AR6aCLAKFSptMJw'},
+    //   crossDomain: true,
+    //   dataType: 'JSON',
+    //   data: {page: page}
+    // }).success(result => {
+    //   this.dispatch(result);
+    // }).fail(error => {
+    //   console.log('AJAX FAIL', error);
+    // });
   }
   uploadPhotos(data, callback){
     let self = this;
