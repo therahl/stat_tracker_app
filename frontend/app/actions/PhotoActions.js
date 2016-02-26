@@ -39,7 +39,7 @@ class PhotoActions {
     // });
   }
   photoTable(page){
-    ApiService.callApi('photos/photo-table', 'GET', { page }, result => { return this.dispatch(result) });
+    // ApiService.callApi('photos/photo-table', 'GET', { page }, result => { return this.dispatch(result) });
 
     // $.ajax({
     //   url: `${BASE_URL}/api/photos/photo-table`,
@@ -56,20 +56,23 @@ class PhotoActions {
   }
   uploadPhotos(data, callback){
     let self = this;
-    $.ajax({
-      url: '${BASE_URL}/api/photos',
-      method: 'POST',
-      dataType: 'JSON',
-      processData: false,
-      contentType: false,
-      data: data
-    }).success(result => {
-      console.log('success');
-      callback();
-      PhotoActions.getPhotoBox();
-    }).fail(err => {
-      console.log(err);
-    });
+    debugger;
+    ApiService.callApi('photos', 'POST', { data }, result => { callback(); this.dispatch(result); }, { processData: false, contentType: false});
+
+    // $.ajax({
+    //   url: '${BASE_URL}/api/photos',
+    //   method: 'POST',
+    //   dataType: 'JSON',
+    //   processData: false,
+    //   contentType: false,
+    //   data: data
+    // }).success(result => {
+    //   console.log('success');
+    //   callback();
+    //   PhotoActions.getPhotoBox();
+    // }).fail(err => {
+    //   console.log(err);
+    // });
   }
 }
 export default alt.createActions(PhotoActions);

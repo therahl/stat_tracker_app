@@ -1,32 +1,26 @@
 import alt from '../alt';
-
-const BASE_URL = 'http://localhost:3000';
+import API from '../services/ApiService';
 
 class SettingsActions {
 
   initialize(){
-    $.ajax({
-      url: `${BASE_URL}/api/settings`,
-      method: 'GET',
-      dataType: 'JSON',
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    API.callApi('settings', 'GET', {}, (result) => { this.dispatch(result) });
   }
   updateSettings(id, settings){
-    $.ajax({
-      url: `${BASE_URL}/api/settings/${id}`,
-      method: 'PUT',
-      dataType: 'JSON',
-      data: { settings: settings }
-    }).success(result => {
-      this.dispatch(result);
-    }).fail(error => {
-      console.log('AJAX FAIL', error);
-    });
+    const url = `settings/${id}`;
+    API.callApi(url, 'PUT', { settings }, (result) => { this.dispatch(result) });
+    // $.ajax({
+    //   url: `${BASE_URL}/api/settings/${id}`,
+    //   method: 'PUT',
+    //   dataType: 'JSON',
+    //   data: { settings: settings }
+    // }).success(result => {
+    //   this.dispatch(result);
+    // }).fail(error => {
+    //   console.log('AJAX FAIL', error);
+    // });
   }
 }
-this.SettingsActions = alt.createActions(SettingsActions);
+// this.SettingsActions = alt.createActions(SettingsActions);
+
 export default alt.createActions(SettingsActions);

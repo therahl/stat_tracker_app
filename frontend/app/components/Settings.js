@@ -1,4 +1,8 @@
 import React from 'react';
+import SettingsActions from '../actions/SettingsActions';
+import UserActions from '../actions/UserActions';
+import SettingsStore from '../stores/SettingsStore';
+import UserStore from '../stores/UserStore';
 
 // TODO features
 // user avatar
@@ -13,8 +17,7 @@ class Settings extends React.Component{
     this.genderChange = this.genderChange.bind(this);
     this.handleStateChange = this.handleStateChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = SettingsStore.getState();
-    this.state = UserStore.getState();
+    this.state = { settings: SettingsStore.getState(), user: UserStore.getState() };
   }
   componentDidMount() {
     SettingsStore.listen(this.handleStateChange);
@@ -69,11 +72,12 @@ class Settings extends React.Component{
     UserActions.updateProfile(data);
   }
   render(){
-    if(!this.state.email){
+    if(!this.state.given_name){
+      console.log('STATE: ', this.state);
       return(<div></div>);
     }
-    let girth = this.state.girth_units === "imperial" ? "US Standard" : this.state.girth_units
-    let weight_units = this.state.weight_units === "imperial" ? "US Standard" : this.state.weight_units
+    let girth = this.state.settings.girth_units === "imperial" ? "US Standard" : this.state.settings.girth_units
+    let weight_units = this.state.settings.weight_units === "imperial" ? "US Standard" : this.state.settings.weight_units
     return(
       <div className="">
         <div className="page-header">

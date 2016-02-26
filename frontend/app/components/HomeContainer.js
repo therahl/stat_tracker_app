@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
 class HomeContainer extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class HomeContainer extends React.Component {
     return (
       <div className=''>
         <div className="home-styles">
-          <section className="home-section row">
+          <section className="intro-section row">
             <div className="col-md-6">
               Demo image here
             </div>
@@ -31,7 +31,16 @@ class HomeContainer extends React.Component {
                 Use our fitness tracking tools to stay on top of your fitness progress.
                 Use our fitness tracking tools to stay on top of your fitness progress.
               </p>
-              <button className="btn btn-primary">Start Now</button>
+              <Link to="/users/sign_up" className="btn btn-primary">Start Now</Link>
+            </div>
+          </section>
+          <section className="features row">
+            <div className="col-xs-12">
+              Realtime Analytics
+              Goal Tracking and Achievement forecasts
+              Weekly Email reminders
+              Convenient weight and body measurements
+
             </div>
           </section>
         </div>

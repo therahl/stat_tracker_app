@@ -55,17 +55,9 @@ class Navbar extends React.Component {
       </ul>
     ) : (
       <ul className="nav navbar-nav navbar-right">
-        <li className="dropdown">
-          <div className="dropdown-toggle" onCLick={this.dropdown}>
-            <img src={this.state.photo_url} className="avatar-img" />{`${this.state.given_name} ${this.state.family_name}`}<span className="caret"></span>
-          </div>
-          <ul className="dropdown-menu">
-            <li><Link to="/settings">Settings</Link></li>
-            <li className="divider"></li>
-            <li onClick={this.handleLogout}>
-              <a href=''>Sign Out</a>
-            </li>
-          </ul>
+        <li>{this.state.email}</li>
+        <li onClick={this.handleLogout}>
+          <Link to='/'>Sign Out</Link>
         </li>
       </ul>
     );

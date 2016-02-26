@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import UserActions from '../actions/UserActions';
 import Auth from '../services/AuthService';
 
@@ -35,7 +36,7 @@ class Login extends React.Component{
           <div className="input-group">
             <button type="submit" className="btn btn-primary">Sign In</button>
           </div>
-          <a href="">Forgot password?</a>
+          <Link to="users/forgot_password">Forgot password?</Link>
         </form>
       </div>);
   }

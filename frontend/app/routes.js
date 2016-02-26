@@ -6,6 +6,8 @@ import PhotoContainer from './components/photos/PhotoContainer';
 import MeasurementsContainer from './components/measurements/MeasurementsContainer';
 import Settings from './components/Settings';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
+import ForgotPassword from './components/ForgotPassword';
 import HomeContainer from './components/HomeContainer';
 // import requireAuth from './components/AuthenticatedComponent';
 import UserStore from './stores/UserStore';
@@ -28,6 +30,8 @@ export default (
     <Route component={MeasurementsContainer} path='/measurements' onEnter={requireAuth} />
     <Route component={Settings} path='/settings' onEnter={requireAuth} />
     <Route component={Login} path='/users/sign_in' />
+    <Route component={SignUp} path='/users/sign_up' />
+    <Route component={ForgotPassword} path='/users/forgot_password' />
     <Route component={DashboardContainer} path='*' />
   </Route>
 );

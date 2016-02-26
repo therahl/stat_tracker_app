@@ -14,8 +14,9 @@ class Api::V1::PhotosController < ApplicationController
         params[:file][:angle] = angles[i]
         current_user.photos.create(photo_params)
       end
-    rescue
-      render json: "ERROR", status: 400
+    rescue => e
+      binding.pry
+      render json: e, status: 400
     end
 
     render json: current_user.photos.last, status: 200

@@ -1,4 +1,5 @@
 import React from 'react';
+import PhotoActions from '../../actions/PhotoActions';
 
 class PhotoUpload extends React.Component{
   constructor(props){
