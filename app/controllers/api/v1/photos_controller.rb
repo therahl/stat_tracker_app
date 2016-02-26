@@ -1,4 +1,6 @@
+require 'application_helper'
 class Api::V1::PhotosController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_with_token!
 
   def create
@@ -22,7 +24,7 @@ class Api::V1::PhotosController < ApplicationController
   def photo_box
     params[:angle] = 'front' unless params[:angle].present?
     photos = current_user.photos.where(angle: params[:angle])
-    render json: { first: photos.first.photo.url, current: photos.last.photo.url, angle: params[:angle] }
+    render json: { first: asset_url(photos.first.photo.url), current: asset_url(photos.last.photo.url), angle: params[:angle] }
   end
 
   def photo_table

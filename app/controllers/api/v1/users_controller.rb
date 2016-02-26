@@ -1,13 +1,15 @@
+require 'application_helper'
 class  Api::V1::UsersController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_with_token!, except: :index
 
   respond_to :json
 
-  def index    
+  def index
     json_object = {
       given_name: current_user.given_name,
       family_name: current_user.family_name,
-      photo_url: ActionController::Base.helpers.asset_url(current_user.avatar.url(:thumb))
+      photo_url: asset_url(current_user.avatar.url(:thumb))
     }
     render json: { user: json_object }
   end
